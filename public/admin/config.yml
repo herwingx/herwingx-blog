@@ -101,8 +101,10 @@ collections:
     create: true
     delete: true
     nested:
-      depth: 3 
-    slug: '{{slug}}'
+      depth: 10 # Permitir mayor profundidad
+    path: '{{slug}}/index' # Estructura carpeta/index.mdx por defecto
+    media_folder: ''   # Guardar imágenes junto al contenido
+    public_folder: ''
     extension: mdx
     format: frontmatter
     fields:
@@ -114,6 +116,7 @@ collections:
         collapsed: true
         required: false
         fields:
+          - { label: Etiqueta Menu, name: label, widget: string, required: false }
           - { label: Orden, name: order, widget: number, required: false }
       - { label: Contenido, name: body, widget: markdown }
 
