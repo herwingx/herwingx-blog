@@ -1,0 +1,120 @@
+---
+title: Guía de Mantenimiento y Contenido
+description: Manual de uso diario para crear, organizar y editar documentación.
+sidebar:
+  order: 2
+---
+
+Esta guía explica cómo gestionar el contenido de tu documentación día a día, ya sea usando el CMS o editando el código directamente.
+
+## 📂 Estructura de Contenido
+
+Recomendamos mantener una estructura **temática** en lugar de genérica. Esto permite que el sidebar se genere automáticamente de forma organizada y que las URLs sean semánticas.
+
+```text
+src/content/docs/
+├── frontend/        # Todo sobre UI/UX, React, CSS
+│   ├── react-hooks.mdx
+│   └── css-grid.mdx
+├── backend/         # Node, DBs, APIs
+│   └── api-design.mdx
+├── devops/          # Infra, CI/CD, Docker
+│   ├── github-actions.mdx
+│   └── cloudflare.mdx
+└── index.mdx        # Página de inicio
+```
+
+### ¿Por qué no una carpeta genérica?
+1. **Escalabilidad**: Con 50 guías, una sola carpeta es inmanejable.
+2. **SEO**: `/devops/docker` es mejor que `/guias/docker`.
+3. **Sidebar**: Starlight agrupa automáticamente por carpeta.
+
+---
+
+## ✨ Crear Nueva Sección
+
+Si quieres documentar algo nuevo (ej: Inteligencia Artificial), simplemente:
+
+1. Crea la carpeta `src/content/docs/ai/`.
+2. Añade un archivo `src/content/docs/ai/index.mdx` (opcional, para la portada de sección).
+3. Añade `src/content/docs/ai/chatgpt.mdx`.
+4. Edita `astro.config.mjs` para añadirlo al sidebar (solo si quieres controlar el orden exacto, si no, Starlight lo detecta).
+
+---
+
+## 📝 Formato de Archivos (Frontmatter)
+
+Cada archivo `.mdx` debe empezar con estos metadatos:
+
+```yaml
+---
+title: Título de la Guía
+description: Breve resumen para SEO y previews.
+sidebar:
+  order: 1               # Orden numérico en el menú (menor = más arriba)
+  badge:                 # (Opcional) Etiqueta visual
+    text: Nuevo
+    variant: tip         # tip, note, caution, danger
+---
+```
+
+---
+
+## 🎨 Componentes Útiles
+
+Aprovecha los componentes de Starlight para hacer guías ricas:
+
+### Asides (Cajas de aviso)
+```mdx
+:::tip[Consejo Pro]
+Usa esto para buenas prácticas.
+:::
+
+:::caution[Cuidado]
+Advertencia sobre posibles errores.
+:::
+```
+
+### Tabs (Pestañas)
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="npm">
+    npm install astro
+  </TabItem>
+  <TabItem label="pnpm">
+    pnpm add astro
+  </TabItem>
+</Tabs>
+```
+
+### Cards (Tarjetas)
+```mdx
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+  <Card title="Conceptos" icon="open-book">
+    Aprende lo básico...
+  </Card>
+  <Card title="Práctica" icon="rocket">
+    Construye algo real...
+  </Card>
+</CardGrid>
+```
+
+---
+
+## 🔄 Flujo de Trabajo Recomendado
+
+### Para cambios rápidos (Typos, frases)
+👉 **Usa el CMS**: Inicia sesión en `/admin/`, edita y guarda. Se despliega solo.
+
+### Para nuevas guías complejas
+👉 **Usa VS Code**:
+1. Crea el archivo localmente.
+2. Usa `npm run dev` para previsualizar mientras escribes.
+3. Haz commit y push cuando termines.
+
+### Para reestructurar (Mover carpetas)
+👉 **Usa VS Code**: Mover archivos y carpetas es mejor hacerlo localmente para asegurar que los enlaces no se rompan.

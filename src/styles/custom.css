@@ -1,83 +1,16 @@
 /**
- * Tema Personalizado - Herwingx Docs
- * Solo ajustes esenciales sin interferir con Starlight
+ * Tema: Starlight Original + Fuentes Premium
  */
 
-/* Fuentes elegantes */
+/* Importar fuentes */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
 
 :root {
+  /* Usar fuente premium */
   --sl-font: 'Plus Jakarta Sans', system-ui, sans-serif;
   --sl-font-mono: 'Fira Code', monospace;
-}
 
-/* Modo oscuro - colores unificados */
-:root[data-theme='dark'] {
-  --sl-color-bg: #0f172a;
-  --sl-color-bg-nav: #0f172a;
-  --sl-color-bg-sidebar: #0f172a;
-  --sl-color-accent: #3b82f6;
-  --sl-color-accent-high: #60a5fa;
-  --sl-color-text: #e2e8f0;
-  --sl-color-hairline: #334155;
-  --sl-color-hairline-light: #1e293b;
-}
-
-/* Sidebar - estado seleccionado visible */
-.sl-sidebar a[aria-current="page"] {
-  background: rgba(59, 130, 246, 0.2) !important;
-  color: #60a5fa !important;
-  font-weight: 600 !important;
-  border-radius: 6px;
-}
-
-.sl-sidebar a:hover {
-  background: rgba(59, 130, 246, 0.1) !important;
-  border-radius: 6px;
-}
-
-/* Cards con hover sutil */
-.sl-link-card {
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.sl-link-card:hover {
-  border-color: var(--sl-color-accent) !important;
-  transform: translateY(-2px);
-}
-
-/* Código inline */
-:not(pre)>code {
-  background: rgba(59, 130, 246, 0.15);
-  color: var(--sl-color-accent-high);
-  padding: 0.15em 0.4em;
-  border-radius: 4px;
-  font-size: 0.9em;
-}
-
-/* Bloques de código */
-pre {
-  background: #0d1117 !important;
-  border-radius: 8px !important;
-}
-
-/* Scrollbar sutil */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--sl-color-accent);
-}
-
-/* Selection */
-::selection {
-  background: var(--sl-color-accent);
-  color: white;
+  /* Color Accent Nativo (Azul) */
+  --sl-hue-accent: 217;
+  /* Blue-600 */
 }

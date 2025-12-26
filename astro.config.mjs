@@ -30,8 +30,11 @@ export default defineConfig({
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/herwingx' },
 			],
-			// Personalización del tema
-			customCss: ['./src/styles/custom.css'],
+			// Color de acento nativo (Azul)
+			customCss: [
+				// Solo fuentes personalizadas
+				'./src/styles/custom.css',
+			],
 			// Configuración del sidebar
 			sidebar: [
 				{
@@ -55,6 +58,11 @@ export default defineConfig({
 					label: '🚀 DevOps',
 					collapsed: false,
 					autogenerate: { directory: 'devops' },
+				},
+				{
+					label: '💼 Proyectos',
+					collapsed: false,
+					autogenerate: { directory: 'proyectos' },
 				},
 			],
 			// Head personalizado para PWA y SEO

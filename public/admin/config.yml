@@ -95,6 +95,28 @@ collections:
               - { label: Variante, name: variant, widget: select, options: [tip, note, caution, danger], required: false }
       - { label: Contenido, name: body, widget: markdown }
 
+  - name: proyectos
+    label: '💼 Proyectos'
+    folder: src/content/docs/proyectos
+    create: true
+    delete: true
+    nested:
+      depth: 3 
+    slug: '{{slug}}'
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { label: Título, name: title, widget: string, required: true }
+      - { label: Descripción, name: description, widget: string, required: true }
+      - label: Sidebar
+        name: sidebar
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { label: Orden, name: order, widget: number, required: false }
+      - { label: Contenido, name: body, widget: markdown }
+
   - name: config
     label: '⚙️ Configuración'
     files:
