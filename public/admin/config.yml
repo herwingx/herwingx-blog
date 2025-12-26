@@ -101,8 +101,7 @@ collections:
     create: true
     delete: true
     nested:
-      depth: 10 # Permitir mayor profundidad
-    path: '{{slug}}/index' # Estructura carpeta/index.mdx por defecto
+      depth: 5
     media_folder: ''   # Guardar imágenes junto al contenido
     public_folder: ''
     extension: mdx
