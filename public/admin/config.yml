@@ -1,8 +1,9 @@
-# Backend: GitHub para producción, test-repo para desarrollo
+# Backend con OAuth Proxy propio
 backend:
   name: github
   repo: herwingx/docs-starlight
   branch: main
+  base_url: https://docs.herwingx.workers.dev
 
 locale: es
 
