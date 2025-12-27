@@ -47,6 +47,122 @@ description: Descripción para SEO
 
 ---
 
+## 📄 Agregar Nuevas Páginas
+
+### En secciones existentes
+Las páginas se agregan automáticamente al sidebar si están en un directorio con `autogenerate`.
+
+**Secciones disponibles:**
+| Sección   | Directorio                             |
+| :-------- | :------------------------------------- |
+| Frontend  | `src/content/docs/frontend/`           |
+| Backend   | `src/content/docs/backend/`            |
+| DevOps    | `src/content/docs/devops/`             |
+| Proyectos | `src/content/docs/proyectos/<nombre>/` |
+
+**Ejemplo - Nueva guía de React:**
+```bash
+touch src/content/docs/frontend/react-hooks.mdx
+```
+
+```mdx
+---
+title: React Hooks
+description: Guía completa de hooks en React
+---
+
+Tu contenido aquí...
+```
+
+> 💡 **Tip:** El orden en el sidebar se controla con `sidebar: { order: N }` en el frontmatter.
+
+---
+
+## 📁 Crear Nueva Sección
+
+Para agregar una nueva sección al sidebar:
+
+### 1. Crear el directorio
+```bash
+mkdir -p src/content/docs/nueva-seccion
+```
+
+### 2. Agregar al sidebar en `astro.config.mjs`
+```javascript
+sidebar: [
+  // ... secciones existentes ...
+  {
+    label: '🔧 Nueva Sección',
+    collapsed: false,
+    autogenerate: { directory: 'nueva-seccion' },
+  },
+],
+```
+
+### 3. Crear primera página
+```bash
+touch src/content/docs/nueva-seccion/index.mdx
+```
+
+### 4. (Opcional) Agregar al CMS en `public/admin/config.yml`
+```yaml
+collections:
+  # ... colecciones existentes ...
+  - name: nueva-seccion
+    label: '🔧 Nueva Sección'
+    folder: src/content/docs/nueva-seccion
+    create: true
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { label: 'Título', name: 'title', widget: 'string' }
+      - { label: 'Descripción', name: 'description', widget: 'string' }
+      - { label: 'Contenido', name: 'body', widget: 'markdown' }
+```
+
+---
+
+## 📘 Agregar Nuevo Proyecto
+
+Para documentar un nuevo proyecto:
+
+### 1. Crear estructura
+```bash
+mkdir -p src/content/docs/proyectos/mi-proyecto
+touch src/content/docs/proyectos/mi-proyecto/index.mdx
+```
+
+### 2. Agregar al sidebar en `astro.config.mjs`
+```javascript
+sidebar: [
+  // ... otras secciones ...
+  {
+    label: '📗 Mi Proyecto',
+    collapsed: false,
+    autogenerate: { directory: 'proyectos/mi-proyecto' },
+  },
+],
+```
+
+### 3. Configurar en CMS (`public/admin/config.yml`)
+```yaml
+collections:
+  - name: mi-proyecto
+    label: 'Proyecto: Mi Proyecto'
+    folder: src/content/docs/proyectos/mi-proyecto
+    create: true
+    extension: mdx
+    format: frontmatter
+    media_folder: ''
+    public_folder: ''
+    fields:
+      - { label: 'Título', name: 'title', widget: 'string' }
+      - { label: 'Descripción', name: 'description', widget: 'string' }
+      - { label: 'Contenido', name: 'body', widget: 'markdown' }
+```
+
+---
+
 ## 📦 Comandos
 
 | Comando           | Descripción         |
