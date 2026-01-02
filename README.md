@@ -1,234 +1,166 @@
-# 📚 Herwingx Docs
+# 📚 Docs Starlight
 
-Documentación personal de desarrollo con [Astro Starlight](https://starlight.astro.build/).
+> **Your Second Brain.** — A premium, PWA-ready documentation hub powered by Astro Starlight and Sveltia CMS.
 
-[![Deploy](https://img.shields.io/badge/🌐-docs.herwingx.dev-blue)](https://docs.herwingx.dev)
-[![GitHub Pages](https://img.shields.io/badge/Hosted-GitHub%20Pages-181717?logo=github)](https://pages.github.com/)
+<!-- BADGES -->
+[![Astro](https://img.shields.io/badge/Astro-5.0-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
+[![Starlight](https://img.shields.io/badge/Starlight-0.27-7735ea?style=flat-square&logo=astro&logoColor=white)](https://starlight.astro.build)
+[![CMS](https://img.shields.io/badge/Sveltia-CMS-00E6A7?style=flat-square)](https://github.com/sveltia/sveltia-cms)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+
+<p align="center">
+  <img src="public/favicon.svg" alt="Docs Logo" width="120" />
+  <br>
+  <em>(Replace with your dashboard screenshot)</em>
+</p>
 
 ---
 
-## 🚀 Inicio Rápido
+## ✨ Features
+
+| Feature              | Description                                                                  |
+| :------------------- | :--------------------------------------------------------------------------- |
+| 📚 **Starlight Core** | Built on top of the powerful Astro 5 framework for blazing fast performance. |
+| ✏️ **Visual CMS**     | Integrated **Sveltia CMS** for managing content without touching code.       |
+| 📱 **PWA Ready**      | Fully installable as a native app on Mobile and Desktop.                     |
+| 🎨 **Premium UI**     | Custom styled components, dark mode, and sleek aesthetics.                   |
+| 🔍 **SEO Optimized**  | Automatic sitemaps, meta tags, and open graph generation.                    |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- Git installed
+- GitHub Account (for CMS backend)
+
+### 1. Create your project
+You can use **GitHub CLI** to clone this template directly:
 
 ```bash
-git clone https://github.com/herwingx/docs-starlight.git
-cd docs-starlight
+# Clone the repository
+gh repo clone herwingx/docs-starlight my-docs
+
+# Enter the directory
+cd my-docs
+```
+
+### 2. Install dependencies
+```bash
 npm install
+```
+
+### 3. Start Development Server
+```bash
 npm run dev
 ```
 
-**URLs locales:**
-- 📖 Docs: `http://localhost:4321`
-- 🎛️ Admin: `http://localhost:4321/admin/`
+**Local URLs:**
+- 📖 **Docs:** `http://localhost:4321`
+- 🎛️ **Admin:** `http://localhost:4321/admin/`
 
 ---
 
-## 📝 Crear Contenido
+## 🏗️ Architecture
 
-### Opción 1: Panel Admin (CMS)
-1. Ve a `https://docs.herwingx.dev/admin/`
-2. Login con GitHub
-3. Crea/edita páginas visualmente
-4. Los cambios se commitean automáticamente
-
-### Opción 2: Archivos MDX
-```bash
-# Crear nueva página
-touch src/content/docs/frontend/mi-guia.mdx
+```mermaid
+graph TD
+    A[Writer / Editor] -->|Via GUI| B[Sveltia CMS]
+    A -->|Via Code| C[VS Code / Git]
+    
+    subgraph Source Control
+    B -->|Commit changes| D[GitHub Repository]
+    C -->|Commit changes| D
+    end
+    
+    subgraph Build & Deploy
+    D -->|Trigger| E[CI/CD Pipeline]
+    E -->|Build Static Files| F[Astro Starlight]
+    F -->|Deploy| G[Hosting Provider]
+    end
+    
+    G -->|Serve| H[PWA / Web App]
 ```
+
+---
+
+## 📦 Deployment Options
+
+This template is cloud-agnostic. You can deploy it anywhere static sites are supported.
+
+| Platform             | Setup                               | Command         |
+| :------------------- | :---------------------------------- | :-------------- |
+| **Cloudflare Pages** | Connect Repo → Preset: `Astro`      | `npm run build` |
+| **GitHub Pages**     | Settings → Source: `GitHub Actions` | `npm run build` |
+| **Vercel**           | Import Project → Preset: `Astro`    | `npm run build` |
+| **Netlify**          | Import Project → Preset: `Astro`    | `npm run build` |
+
+### Using GitHub CLI for Deploy (Example)
+If you want to set up GitHub Pages quickly:
+
+```bash
+# Enable GitHub Pages via Actions
+gh repo edit --enable-pages --source-branch main --source-path /
+```
+
+---
+
+## 📝 Content Management
+
+### Using the Visual CMS
+1. Navigate to `/admin/`.
+2. Login with your GitHub account.
+3. Create or edit collections visually.
+4. Updates are automatically committed to your repo.
+
+### Manual Editing (MDX)
+Create new `.mdx` files in `src/content/docs/`:
 
 ```mdx
 ---
-title: Mi Guía
-description: Descripción para SEO
+title: My New Page
+description: A description for SEO
 ---
 
-# Contenido aquí
+# Hello World
+This is a new documentation page.
 ```
 
 ---
 
-## 📄 Agregar Nuevas Páginas
+##  Useful Commands
 
-### En secciones existentes
-Las páginas se agregan automáticamente al sidebar si están en un directorio con `autogenerate`.
-
-**Secciones disponibles:**
-| Sección   | Directorio                             |
-| :-------- | :------------------------------------- |
-| Frontend  | `src/content/docs/frontend/`           |
-| Backend   | `src/content/docs/backend/`            |
-| DevOps    | `src/content/docs/devops/`             |
-| Proyectos | `src/content/docs/proyectos/<nombre>/` |
-
-**Ejemplo - Nueva guía de React:**
-```bash
-touch src/content/docs/frontend/react-hooks.mdx
-```
-
-```mdx
----
-title: React Hooks
-description: Guía completa de hooks en React
----
-
-Tu contenido aquí...
-```
-
-> 💡 **Tip:** El orden en el sidebar se controla con `sidebar: { order: N }` en el frontmatter.
+| Command           | Action                               |
+| :---------------- | :----------------------------------- |
+| `npm run dev`     | Start local dev server               |
+| `npm run build`   | Build for production                 |
+| `npm run preview` | Preview the production build locally |
+| `npm run dev:cms` | Run dev server with local CMS proxy  |
 
 ---
 
-## 📁 Crear Nueva Sección
+## 🛠️ Tech Stack
 
-Para agregar una nueva sección al sidebar:
+**Frontend**
+- **Framework**: Astro 5
+- **Theme**: Starlight theme
+- **Styles**: CSS Variables + Custom Glassmorphism
 
-### 1. Crear el directorio
-```bash
-mkdir -p src/content/docs/nueva-seccion
-```
-
-### 2. Agregar al sidebar en `astro.config.mjs`
-```javascript
-sidebar: [
-  // ... secciones existentes ...
-  {
-    label: '🔧 Nueva Sección',
-    collapsed: false,
-    autogenerate: { directory: 'nueva-seccion' },
-  },
-],
-```
-
-### 3. Crear primera página
-```bash
-touch src/content/docs/nueva-seccion/index.mdx
-```
-
-### 4. (Opcional) Agregar al CMS en `public/admin/config.yml`
-```yaml
-collections:
-  # ... colecciones existentes ...
-  - name: nueva-seccion
-    label: '🔧 Nueva Sección'
-    folder: src/content/docs/nueva-seccion
-    create: true
-    extension: mdx
-    format: frontmatter
-    fields:
-      - { label: 'Título', name: 'title', widget: 'string' }
-      - { label: 'Descripción', name: 'description', widget: 'string' }
-      - { label: 'Contenido', name: 'body', widget: 'markdown' }
-```
+**Tools**
+- **CMS**: Sveltia CMS (Git-based)
+- **Icons**: Phosphor / Astro Icon
+- **PWA**: Vite PWA Plugin
 
 ---
 
-## 📘 Agregar Nuevo Proyecto
+## 🤝 Contributing & License
 
-Para documentar un nuevo proyecto:
+Feel free to fork this project and use it as a base for your own documentation.
 
-### 1. Crear estructura
-```bash
-mkdir -p src/content/docs/proyectos/mi-proyecto
-touch src/content/docs/proyectos/mi-proyecto/index.mdx
-```
+1. Fork the repo: `gh repo fork herwingx/docs-starlight`
+2. Create feature branch: `git checkout -b feature/amazing-docs`
+3. Commit changes: `git commit -m 'feat: add amazing docs'`
+4. Push: `git push origin feature/amazing-docs`
 
-### 2. Agregar al sidebar en `astro.config.mjs`
-```javascript
-sidebar: [
-  // ... otras secciones ...
-  {
-    label: '📗 Mi Proyecto',
-    collapsed: false,
-    autogenerate: { directory: 'proyectos/mi-proyecto' },
-  },
-],
-```
-
-### 3. Configurar en CMS (`public/admin/config.yml`)
-```yaml
-collections:
-  - name: mi-proyecto
-    label: 'Proyecto: Mi Proyecto'
-    folder: src/content/docs/proyectos/mi-proyecto
-    create: true
-    extension: mdx
-    format: frontmatter
-    media_folder: ''
-    public_folder: ''
-    fields:
-      - { label: 'Título', name: 'title', widget: 'string' }
-      - { label: 'Descripción', name: 'description', widget: 'string' }
-      - { label: 'Contenido', name: 'body', widget: 'markdown' }
-```
-
----
-
-## 📦 Comandos
-
-| Comando           | Descripción         |
-| :---------------- | :------------------ |
-| `npm run dev`     | Servidor desarrollo |
-| `npm run build`   | Build producción    |
-| `npm run preview` | Preview del build   |
-
----
-
-## 🚀 Deploy (GitHub Pages)
-
-### Configuración Inicial (una vez)
-
-1. **Crear repositorio en GitHub:**
-   ```bash
-   gh repo create docs-starlight --public --source=. --push
-   ```
-
-2. **Habilitar GitHub Pages:**
-   - Ve a `Settings > Pages`
-   - Source: **GitHub Actions**
-
-3. **Configurar dominio en Cloudflare:**
-   - Tipo: `CNAME`
-   - Name: `docs`
-   - Target: `herwingx.github.io`
-
-4. **Primer deploy:**
-   ```bash
-   git push origin main
-   ```
-
-### Deploy Automático
-Cada push a `main` despliega automáticamente via GitHub Actions.
-
----
-
-## 📱 PWA (Progressive Web App)
-
-El sitio es instalable como app:
-
-**En móvil:**
-- Visita `docs.herwingx.dev`
-- Menú → "Añadir a pantalla de inicio"
-
-**En desktop:**
-- Chrome/Edge muestran botón de instalación
-
----
-
-## 🎛️ CMS (Sveltia CMS)
-
-- **URL:** `https://docs.herwingx.dev/admin/`
-- **Backend:** GitHub (OAuth)
-- Los cambios se commitean al repo y despliegan automáticamente
-
----
-
-## 🛠️ Tecnologías
-
-- Astro 5.x + Starlight 0.37
-- Sveltia CMS
-- GitHub Pages
-- PWA ready
-
----
-
-MIT © [herwingx](https://github.com/herwingx)
+Licensed under **MIT**.
