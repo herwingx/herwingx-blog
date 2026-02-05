@@ -1,56 +1,32 @@
 ---
-title: Backend
-description: APIs, bases de datos y arquitecturas de servidor
+title: Backend & Chaos Engineering
+description: APIs, Bases de Datos y la lógica que nadie ve pero todos necesitan.
+sidebar:
+  hidden: true
+prev: false
+next: false
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard, Badge } from '@astrojs/starlight/components';
 
-# ⚙️ Backend
+<Badge text="📂 Backend" variant="note" size="medium" />
 
-> **"Data dominates. If you've chosen the right data structures, the algorithms will almost always be self-evident."** — Rob Pike.
+## 🧠 El Iceberg Digital
 
-Bienvenido a la sección de **Backend**. Documentación sobre desarrollo de APIs, bases de datos, arquitecturas y patrones de diseño.
+:::tip[Fun Fact]
+¿Sabías que cuando haces login en Instagram, tu petición viaja por cables submarinos, pasa por 3 firewalls, se valida en 2 microservicios y consulta una base de datos shardeada en menos tiempo del que tardas en parpadear? (aprox. 300ms).
+:::
 
-## 📚 Categorías
+El Backend es el arte de hacer que lo complejo parezca instantáneo. Aquí no pintamos píxeles, diseñamos **flujos de datos**.
+
+### ¿Qué cocinamos aquí?
 
 <CardGrid>
   <LinkCard
-    title="Node.js"
-    description="Express, NestJS, y el ecosistema Node"
-    href="/backend/nodejs/"
+    title="Cursor + IA"
+    description="Programar backend a mano es del 2023. Mira cómo uso la IA de copiloto."
+    href="./cursor/"
+    icon="seti:copilot"
   />
-  <LinkCard
-    title="Bases de Datos"
-    description="PostgreSQL, MongoDB, Redis y ORMs"
-    href="/backend/databases/"
-  />
-  <LinkCard
-    title="APIs"
-    description="REST, GraphQL y diseño de APIs"
-    href="/backend/apis/"
-  />
-  <LinkCard
-    title="Autenticación"
-    description="JWT, OAuth, sessions y seguridad"
-    href="/backend/auth/"
-  />
+  {/* Próximamente: Bases de Datos, APIs, Auth */}
 </CardGrid>
-
----
-
-## 🏗️ Arquitecturas y Patrones
-
-Enfoques arquitectónicos documentados en esta sección:
-
-| Arquitectura | Descripción |
-| :--- | :--- |
-| **Clean Architecture** | Separación estricta de responsabilidades y dependencias. |
-| **Microservicios** | Sistemas distribuidos y comunicación entre servicios. |
-| **Event-Driven** | Arquitecturas reactivas basadas en eventos asíncronos. |
-| **Serverless** | Funciones lambda y servicios gestionados en la nube. |
-
----
-
-:::note[Nota]
-Los ejemplos de código están escritos principalmente en **TypeScript** siguiendo las convenciones de Clean Code.
-:::

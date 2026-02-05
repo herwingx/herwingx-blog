@@ -1,87 +1,59 @@
 ---
-title: Herwingx Docs
-description: Ficha técnica y estado del proyecto.
+title: "Making Of: Herwingx Labs"
+description: Un tour por las entrañas de este sitio. Te explico todo el stack y configuración.
 sidebar:
-  label: Inicio
+  label: Intro Lab
   order: 1
 ---
 
 import { Badge, Card, CardGrid, LinkCard, Steps } from '@astrojs/starlight/components';
 
-> **Base de Conocimiento Centralizada** — Demostración técnica de capacidades DevOps y Fullstack.
+<Badge text="🧪 Lab / Docs" variant="note" size="medium" />
 
-[![Estado](https://img.shields.io/badge/Estado-En_Producción-2ea44f?style=flat-square&logo=github)](https://github.com/herwingx/docs-starlight)
-[![Versión](https://img.shields.io/badge/Versión-v1.0.0-blue?style=flat-square)](https://github.com/herwingx/docs-starlight/releases)
-[![Stack](https://img.shields.io/badge/Stack-Astro_Starlight-orange?style=flat-square&logo=astro)](https://astro.build)
+¿Te gusta cómo se ve este sitio? Aquí te cuento el secreto. No usé WordPress ni Wix. Lo programé desde cero (bueno, con ayuda de Astro) para que sea el sitio más rápido del oeste. 🤠
+
+[![Estado](https://img.shields.io/badge/Estado-Vivo_y_Coleando-2ea44f?style=flat-square&logo=github)](https://github.com/herwingx/docs-starlight)
+[![Stack](https://img.shields.io/badge/Stack-Astro_%2B_React-orange?style=flat-square&logo=astro)](https://astro.build)
 
 ---
 
-## 🚀 Acceso Rápido
+## 🏗️ La "Salsa Secreta" (Stack)
+
+En mis videos a veces menciono que uso "Static Sites". Esto es de lo que hablo:
 
 <CardGrid stagger>
-  <Card title="Panel Admin (CMS)" icon="setting">
-    Gestión visual de contenido sin tocar código.
-    <br/>
-    [**Ir al CMS →**](/admin/)
+  <Card title="Astro Docs" icon="rocket">
+    El framework. Es HTML puro con súper poderes. Carga instantáneo porque no envía JavaScript innecesario.
   </Card>
-  <Card title="Código Fuente" icon="github">
-    Repositorio público en GitHub.
-    <br/>
-    [**Ver Repo →**](https://github.com/herwingx/docs-starlight)
+  <Card title="GitHub Pages" icon="github">
+    Donde vive el sitio. Es gratis, rápido y se actualiza solo cuando subo código a GitHub.
   </Card>
-  <Card title="Sitio Público" icon="laptop">
-    Versión desplegada en producción.
-    <br/>
-    [**Visitar →**](https://docs.herwingx.dev)
+  <Card title="Sveltia CMS" icon="pencil">
+    El panel "secreto" (`/admin`) donde escribo estos artículos sin abrir el editor de código.
   </Card>
 </CardGrid>
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 🗺️ Explora el Código
 
-| Componente | Tecnología | Badge |
-| :--- | :--- | :--- |
-| **Core** | Astro v5 | ![Astro](https://img.shields.io/badge/Astro-BC52EE?style=flat-square&logo=astro&logoColor=white) |
-| **Auth** | OAuth 2.0 | ![OAuth](https://img.shields.io/badge/Cloudflare_Workers-F38020?style=flat-square&logo=cloudflare&logoColor=white) |
-| **Hosting** | GitHub Pages | ![Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=flat-square&logo=github&logoColor=white) |
+¿Quieres copiarte mí configuración? ¡Adelante! Es Open Source.
 
----
+<CardGrid>
+  <LinkCard
+    title="Cómo funciona el Login"
+    description="Explicación del sistema OAuth 'Serverless' (sin servidor) que usé."
+    href="./arquitectura/"
+    icon="puzzle"
+  />
+  <LinkCard
+    title="La Guía de Contenido"
+    description="Mis reglas personales para escribir tutoriales bonitos."
+    href="./mantenimiento/"
+    icon="document"
+  />
+</CardGrid>
 
-## 🗺️ Mapa del Proyecto
-
-Explora la documentación interna sobre cómo funciona este sistema:
-
-<div class="not-content">
-  <CardGrid>
-    <LinkCard
-      title="Arquitectura Técnica"
-      description="Diagramas de flujo, autenticación OAuth y despliegue."
-      href="./arquitectura/"
-      icon="puzzle"
-    />
-    <LinkCard
-      title="Guía de Mantenimiento"
-      description="Cómo crear contenido nuevo y organizar carpetas."
-      href="./mantenimiento/"
-      icon="document"
-    />
-  </CardGrid>
-</div>
-
----
-
-## ✅ Roadmap
-
-<Steps>
-
-1.  **Fase 1: Infraestructura** ✅
-    Configuración de Astro, GitHub Actions y Cloudflare Tunnels (migrado a Pages).
-
-2.  **Fase 2: Contenido Dinámico** ✅
-    Integración de Sveltia CMS y autenticación segura con Workers.
-
-3.  **Fase 3: Migración de Conocimiento** 🔄
-    Volcar notas antiguas de Obsidian y Notion a este formato.
-
-</Steps>
+:::note[¿Por qué hacer esto?]
+Crear tu propio sitio web personal es el mejor portafolio que puedes tener. Si sigues mis tutoriales, ¡tú tendrás uno igual a este en menos de 1 hora!
+:::

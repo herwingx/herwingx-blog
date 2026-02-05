@@ -7,8 +7,8 @@ export default defineConfig({
 	site: 'https://docs.herwingx.dev',
 	integrations: [
 		starlight({
-			title: 'Herwingx Docs',
-			description: 'Documentación personal de desarrollo - Frontend, Backend y DevOps',
+			title: 'Herwingx Labs',
+			description: 'Tutoriales y recursos avanzados de desarrollo - Frontend, Backend y DevOps',
 			logo: {
 				light: './src/assets/logo-light.svg',
 				dark: './src/assets/logo-dark.svg',
@@ -40,8 +40,7 @@ export default defineConfig({
 				{
 					label: '🏠 Inicio',
 					items: [
-						{ label: 'Bienvenida', slug: '' },
-						{ label: '📝 Panel Admin', link: '/admin/', attrs: { target: '_blank' } },
+						{ label: 'Introducción', slug: 'intro' },
 					],
 				},
 				{
@@ -61,9 +60,9 @@ export default defineConfig({
 				},
 				// Proyectos Específicos (Nivel Raíz)
 				{
-					label: '📘 Herwingx Docs',
+					label: '🧪 Lab & Setups',
 					collapsed: false,
-					autogenerate: { directory: 'proyectos/herwingx-docs' },
+					autogenerate: { directory: 'proyectos' },
 				},
 			],
 			// Head personalizado para PWA y SEO

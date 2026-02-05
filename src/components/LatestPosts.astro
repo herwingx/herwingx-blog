@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+// 1. Obtener todos los documentos de la colección 'docs'
+const allDocs = await getCollection("docs");
+
+// 2. Filtrar y Ordenar
+const latestDocs = allDocs
+  .filter((doc) => {
+    // Excluir la página de inicio y archivos sin fecha o "drafts"
+    return !doc.id.endsWith("index.mdx") && doc.data.date;
+  })
+  .sort((a, b) => {
+    // Ordenar por fecha descendente (Más reciente primero)
+    return new Date(b.data.date!).getTime() - new Date(a.data.date!).getTime();
+  })
+  .slice(0, 3); // Tomar solo los 3 primeros
+
+console.log(
+  "Posts encontrados:",
+  latestDocs.map((d) => ({ id: d.id, date: d.data.date })),
+);
+---
+
+<CardGrid stagger>
+  {
+    latestDocs.length > 0 ? (
+      latestDocs.map((doc) => (
+        <Card title={doc.data.title} icon="star">
+          {doc.data.description}
+          <br />
+          <a
+            href={`/${doc.id.replace(/\.mdx?$/, "")}/`}
+            style="text-decoration: none; font-weight: bold;"
+          >
+            👉 Leer Tutorial
+          </a>
+        </Card>
+      ))
+    ) : (
+      <Card title="Esperando contenido..." icon="pencil">
+        Pronto verás aquí mis últimos tutoriales. ¡Asegúrate de ponerle fecha a
+        tus posts!
+      </Card>
+    )
+  }
+</CardGrid>

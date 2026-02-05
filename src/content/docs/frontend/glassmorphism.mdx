@@ -1,0 +1,30 @@
+---
+title: Efecto Glassmorphism (Sin JS)
+date: "2026-02-04"
+description: Cómo crear tarjetas con efecto de vidrio esmerilado usando solo CSS backdrop-filter.
+sidebar:
+  order: 10
+  badge:
+    text: Nuevo
+    variant: success
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+El **Glassmorphism** sigue siendo tendencia. Lo mejor es que ya no necesitas imágenes PNG pesadas ni librerías extrañas. El soporte de `backdrop-filter` es casi universal.
+
+## La Receta Secreta
+
+Solo necesitas estas 3 líneas de CSS:
+
+```css
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+```
+
+:::tip
+Para que se note, asegúrate de tener un fondo colorido o con gradientes detrás de la tarjeta.
+:::

@@ -1,0 +1,84 @@
+---
+title: Backups Indestructibles con Rclone
+date: 2026-02-03
+description: Automatiza la copia de tus servidores a Google Drive, S3 o Backblaze encriptado.
+sidebar:
+  order: 10
+  badge:
+    text: Nuevo
+    variant: success
+---
+
+import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Tener un servidor sin backups es esperar a que ocurra una tragedia. En este tutorial configuraremos **Rclone** para sincronizar tus datos críticos a la nube de forma **encriptada y automática**.
+
+---
+
+## 🛡️ La Estrategia 3-2-1
+
+Antes de tirar código, entiende la regla de oro:
+1.  **3** copias de tus datos.
+2.  En **2** medios diferentes (disco local + nube).
+3.  **1** copia fuera del sitio (Off-site).
+
+---
+
+## 🛠️ Configuración
+
+<Steps>
+
+1.  **Instalar Rclone**
+
+    ```bash
+    sudo -v ; curl https://rclone.org/install.sh | sudo bash
+    ```
+
+2.  **Conectar tu Nube**
+
+    Ejecuta el asistente interactivo. Es mágico.
+
+    ```bash
+    rclone config
+    ```
+
+    <Tabs>
+      <TabItem label="Google Drive">
+        Selecciona la opción `drive`. Tendrás que autorizar desde tu navegador.
+      </TabItem>
+      <TabItem label="AWS S3">
+        Ten a mano tu `Access Key ID` y `Secret Access Key`.
+      </TabItem>
+      <TabItem label="SFTP">
+        Ideal si tienes otro servidor VPS para almacenamiento.
+      </TabItem>
+    </Tabs>
+
+3.  **Comando de Sincronización**
+
+    El comando que lo hace todo. Sincroniza tu carpeta local con el remoto:
+
+    ```bash
+    # Estructura: rclone sync <origen> <destino>
+    rclone sync /home/user/docker-data remote:backup-server
+    ```
+
+4.  **Automatizar con Cron (Linux)**
+
+    Para que ocurra cada noche a las 3 AM sin que tengas que acordarte.
+
+    ```bash
+    crontab -e
+    ```
+
+    Añade esta línea:
+
+    ```cron
+    0 3 * * * rclone sync /home/user/docker-data remote:backup-server >> /var/log/rclone.log 2>&1
+    ```
+
+</Steps>
+
+:::tip[Encriptación]
+Rclone permite crear una capa "Crypt". Úsala siempre. Así, ni siquiera Google o Amazon podrán leer tus archivos. Solo tú tienes la llave.
+:::

@@ -1,57 +1,39 @@
 ---
-title: DevOps
-description: CI/CD, contenedores, infraestructura y automatización
+title: DevOps & Automatización
+description: Deja de trabajar manual. Aprende a desplegar, automatizar y gestionar servidores.
+sidebar:
+  hidden: true
+prev: false
+next: false
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard, Badge } from '@astrojs/starlight/components';
 
-# 🚀 DevOps
+<Badge text="📂 DevOps" variant="note" size="medium" />
 
-> **"It is not only what we do, but also what we receive, that allows us to serve."** — Infrastructure as Code.
+## 🏗️ "En mi local funcionaba" ¯\_(ツ)_/¯
 
-Aquí documento todo sobre automatización, infraestructura de servidores, contenedores y estrategias de despliegue continuo.
+Esta frase ha causado más despidos que la crisis económica.
 
-## 📚 Categorías
+:::note[Fun Fact]
+Los servidores de Netflix se caen a propósito todos los días. Tienen un bot llamado **Chaos Monkey** que apaga servidores aleatorios para obligar a los ingenieros a diseñar sistemas irrompibles.
+:::
+
+Aquí no jugamos a ser sysadmin de los 90s. Aquí **automatizamos todo**. Si tienes que entrar por SSH a arreglar algo, has fallado.
+
+### El Arsenal
 
 <CardGrid>
   <LinkCard
-    title="GitHub Actions"
-    description="Workflows, CI/CD y automatización"
-    href="/devops/github-actions/"
+    title="Tu Propio Bitwarden"
+    description="Deja de regalarle tus contraseñas a Google. Sé dueño de tus secretos."
+    href="./vaultwarden/"
+    icon="lock"
   />
   <LinkCard
-    title="Docker"
-    description="Contenedores, imágenes y Docker Compose"
-    href="/devops/docker/"
-  />
-  <LinkCard
-    title="Cloudflare"
-    description="Tunnels, Workers y configuración DNS"
-    href="/devops/cloudflare/"
-  />
-  <LinkCard
-    title="Home Lab"
-    description="Servidores caseros y auto-hosting"
-    href="/devops/homelab/"
+    title="Backups Paranoicos"
+    description="La regla 3-2-1: 3 copias, 2 medios, 1 fuera de casa (en la nube encriptado)."
+    href="./rclone-backups/"
+    icon="google-drive"
   />
 </CardGrid>
-
----
-
-## 🔧 Herramientas Principales
-
-Las herramientas que forman el núcleo de mi stack de operaciones:
-
-| Herramienta | Uso Principal |
-| :--- | :--- |
-| **GitHub Actions** | CI/CD y automatización de procesos. |
-| **Docker** | Contenedorización y entornos aislados. |
-| **Cloudflare Tunnels** | Exposición segura de servicios locales a internet. |
-| **Nginx** | Reverse proxy y gestión de tráfico. |
-| **Portainer** | Gestión visual de contenedores Docker. |
-
----
-
-:::caution[Importante]
-Las configuraciones de seguridad (secrets, tokens, etc.) **nunca** se incluyen en la documentación pública. Usa variables de entorno y secrets de GitHub.
-:::

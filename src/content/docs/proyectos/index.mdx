@@ -1,43 +1,39 @@
 ---
-title: Portafolio de Proyectos
-description: Índice centralizado de proyectos personales y profesionales.
+title: Lab & Experimentos
+description: El detrás de cámaras de mis proyectos, configs de terminal y locuras que estoy probando.
 sidebar:
-  order: 0
-  badge:
-    text: Índice
-    variant: note
+  hidden: true
+prev: false
+next: false
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid, Badge } from '@astrojs/starlight/components';
 
-Bienvenido a la colección de proyectos documentados. Aquí encontrarás detalles técnicos, arquitecturas y guías de mantenimiento.
+<Badge text="🧪 Lab & Setups" variant="note" size="medium" />
 
-## 🚀 Proyectos Activos
+Aquí no guardo "documentos", aquí guardo **recetas**.
+
+Esta sección es para los curiosos que quieren saber qué terminal uso, cómo configuro mi shell (`.zshrc` tuneado), qué fuentes hackers tengo instaladas o cómo monté este mismo sitio web.
+
+## 🧪 El Laboratorio
 
 <CardGrid>
   <LinkCard
-    title="📘 Herwingx Docs"
-    description="Documentación de este mismo sitio. Arquitectura serverless, CI/CD con GitHub Actions y CMS."
+    title="Cómo hice este sitio"
+    description="El stack detrás de la academia: Astro, Starlight, Servidores Serverless y GitHub Actions."
     href="./herwingx-docs/"
-    icon="open-book"
+    icon="laptop"
   />
-  
-  {/* Espacio para futuros proyectos */}
-  {/* 
-  <LinkCard
-    title="📗 Finanzas Personales"
-    description="Sistema de gestión financiera con Next.js y Supabase."
-    href="./finanzas/"
-    icon="chart-bar"
-  /> 
-  */}
 </CardGrid>
 
-## 💡 Ideas / Laboratorio
+## 🔧 Próximamente (Setup Personal)
 
-:::note[En Construcción]
-Próximamente añadiré aquí pequeños experimentos y pruebas de concepto.
+Guías que estoy preparando para ti:
+
+- **Mi Terminal Definitiva**: Oh My Zsh + Powerlevel10k + Plugins secretos.
+- **Vim Mode en VS Code**: Para sentirte hacker en videos de TikTok.
+- **Scripts de Automatización**: Esos comandos mágicos que uso en los videos.
+
+:::tip[Fun Fact]
+¿Sabías que puedes personalizar el mensaje de bienvenida de tu terminal para que te salude como JARVIS? Pronto subiré el tutorial aquí.
 :::
-
-- **Laboratorio de UI**: Componentes React experimentales.
-- **Scripts**: Automatizaciones en Python y Bash.

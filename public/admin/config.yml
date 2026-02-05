@@ -12,16 +12,30 @@ public_folder: /src/assets/images
 
 collections:
   - name: frontend
-    label: '🎨 Frontend'
+    label: "🎨 Frontend"
     folder: src/content/docs/frontend
     create: true
     delete: true
-    slug: '{{slug}}'
+    slug: "{{slug}}"
     extension: mdx
     format: frontmatter
     fields:
       - { label: Título, name: title, widget: string, required: true }
-      - { label: Descripción, name: description, widget: string, required: true }
+      - {
+          label: Fecha,
+          name: date,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          time_format: false,
+          default: "{{now}}",
+          required: false,
+        }
+      - {
+          label: Descripción,
+          name: description,
+          widget: string,
+          required: true,
+        }
       - label: Sidebar
         name: sidebar
         widget: object
@@ -36,20 +50,40 @@ collections:
             required: false
             fields:
               - { label: Texto, name: text, widget: string, required: false }
-              - { label: Variante, name: variant, widget: select, options: [tip, note, caution, danger], required: false }
+              - {
+                  label: Variante,
+                  name: variant,
+                  widget: select,
+                  options: [tip, note, caution, danger],
+                  required: false,
+                }
       - { label: Contenido, name: body, widget: markdown }
 
   - name: backend
-    label: '⚙️ Backend'
+    label: "⚙️ Backend"
     folder: src/content/docs/backend
     create: true
     delete: true
-    slug: '{{slug}}'
+    slug: "{{slug}}"
     extension: mdx
     format: frontmatter
     fields:
       - { label: Título, name: title, widget: string, required: true }
-      - { label: Descripción, name: description, widget: string, required: true }
+      - {
+          label: Fecha,
+          name: date,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          time_format: false,
+          default: "{{now}}",
+          required: false,
+        }
+      - {
+          label: Descripción,
+          name: description,
+          widget: string,
+          required: true,
+        }
       - label: Sidebar
         name: sidebar
         widget: object
@@ -64,20 +98,40 @@ collections:
             required: false
             fields:
               - { label: Texto, name: text, widget: string, required: false }
-              - { label: Variante, name: variant, widget: select, options: [tip, note, caution, danger], required: false }
+              - {
+                  label: Variante,
+                  name: variant,
+                  widget: select,
+                  options: [tip, note, caution, danger],
+                  required: false,
+                }
       - { label: Contenido, name: body, widget: markdown }
 
   - name: devops
-    label: '🚀 DevOps'
+    label: "🚀 DevOps"
     folder: src/content/docs/devops
     create: true
     delete: true
-    slug: '{{slug}}'
+    slug: "{{slug}}"
     extension: mdx
     format: frontmatter
     fields:
       - { label: Título, name: title, widget: string, required: true }
-      - { label: Descripción, name: description, widget: string, required: true }
+      - {
+          label: Fecha,
+          name: date,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          time_format: false,
+          default: "{{now}}",
+          required: false,
+        }
+      - {
+          label: Descripción,
+          name: description,
+          widget: string,
+          required: true,
+        }
       - label: Sidebar
         name: sidebar
         widget: object
@@ -92,32 +146,57 @@ collections:
             required: false
             fields:
               - { label: Texto, name: text, widget: string, required: false }
-              - { label: Variante, name: variant, widget: select, options: [tip, note, caution, danger], required: false }
+              - {
+                  label: Variante,
+                  name: variant,
+                  widget: select,
+                  options: [tip, note, caution, danger],
+                  required: false,
+                }
       - { label: Contenido, name: body, widget: markdown }
 
   - name: project-docs
-    label: '📘 Herwingx Docs'
+    label: "📘 Herwingx Labs"
     folder: src/content/docs/proyectos/herwingx-docs
     create: true
     delete: true
-    slug: '{{slug}}'
+    slug: "{{slug}}"
     extension: mdx
     format: frontmatter
     fields:
       - { label: Título, name: title, widget: string, required: true }
-      - { label: Descripción, name: description, widget: string, required: true }
+      - {
+          label: Fecha,
+          name: date,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          time_format: false,
+          default: "{{now}}",
+          required: false,
+        }
+      - {
+          label: Descripción,
+          name: description,
+          widget: string,
+          required: true,
+        }
       - label: Sidebar
         name: sidebar
         widget: object
         collapsed: true
         required: false
         fields:
-          - { label: Etiqueta Menu, name: label, widget: string, required: false }
+          - {
+              label: Etiqueta Menu,
+              name: label,
+              widget: string,
+              required: false,
+            }
           - { label: Orden, name: order, widget: number, required: false }
       - { label: Contenido, name: body, widget: markdown }
 
   - name: config
-    label: '⚙️ Configuración'
+    label: "⚙️ Configuración"
     files:
       - label: Página Principal
         name: home

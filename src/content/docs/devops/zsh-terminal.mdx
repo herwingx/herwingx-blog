@@ -1,0 +1,46 @@
+---
+title: Terminal Hacker con ZSH y Powerlevel10k
+date: "2026-02-05"
+description: Transforma tu aburrida consola en una nave espacial. Iconos, autocompletado y colores neon.
+sidebar:
+  order: 10
+
+  badge:
+    text: Nuevo
+    variant: success
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+¿Tu terminal se ve en blanco y negro? Eso es porque quieres. Hoy vamos a instalar la configuración que uso en mis videos.
+
+## 🚀 Instalación Rápida
+
+<Steps>
+
+1.  **Instalar ZSH**
+
+    ```bash
+    sudo apt install zsh
+    chsh -s $(which zsh)
+    ```
+
+2.  **Instalar Oh My Zsh**
+
+    ```bash
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    ```
+
+3.  **El Tema: Powerlevel10k**
+
+    Es el tema más rápido y customizable.
+
+    ```bash
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    ```
+
+</Steps>
+
+:::tip[Pro Tip]
+Combínalo con la fuente **MesloLGS NF** para que se vean todos los iconos correctamente.
+:::

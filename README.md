@@ -1,166 +1,163 @@
-# 📚 Docs Starlight
+# 🧪 Herwingx Labs
 
-> **Tu Segundo Cerebro.** — Un centro de documentación premium, listo para PWA, impulsado por Astro Starlight y Sveltia CMS.
+> **Donde rompo cosas para aprender cómo funcionan.** — Tutoriales prácticos sobre desarrollo, servidores caseros y vida en la terminal.
 
-<!-- BADGES -->
+[![Estado](https://img.shields.io/badge/Estado-En_Producción-2ea44f?style=flat-square&logo=github)](https://docs.herwingx.dev)
 [![Astro](https://img.shields.io/badge/Astro-5.0-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Starlight](https://img.shields.io/badge/Starlight-0.27-7735ea?style=flat-square&logo=astro&logoColor=white)](https://starlight.astro.build)
-[![CMS](https://img.shields.io/badge/Sveltia-CMS-00E6A7?style=flat-square)](https://github.com/sveltia/sveltia-cms)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+[![CMS](https://img.shields.io/badge/Decap-CMS-00E6A7?style=flat-square)](https://decapcms.org/)
 
 <p align="center">
-  <img src="public/favicon.svg" alt="Logo Docs" width="120" />
-  <br>
-  <em>(Reemplaza esto con una captura de tu dashboard)</em>
+  <img src="public/favicon.svg" alt="Herwingx Labs Logo" width="120" />
 </p>
 
 ---
 
-## ✨ Características
+## 🔬 ¿Qué es este Laboratorio?
 
-| Característica       | Descripción                                                                 |
-| :------------------- | :-------------------------------------------------------------------------- |
-| 📚 **Core Starlight** | Construido sobre el potente framework Astro 5 para una velocidad increíble. |
-| ✏️ **CMS Visual**     | **Sveltia CMS** integrado para gestionar contenido sin tocar código.        |
-| 📱 **Lista para PWA** | Totalmente instalable como app nativa en Móvil y Escritorio.                |
-| 🎨 **UI Premium**     | Componentes estilizados, modo oscuro y estética moderna.                    |
-| 🔍 **SEO Optimizado** | Sitemaps automáticos, meta tags y generación de open graph.                 |
+Este no es un blog normal. Es un **sistema de documentación vivo**.
+Aquí publico mis experimentos de código, configuraciones de servidores y flujos de trabajo con IA.
 
----
-
-## 🚀 Inicio Rápido
-
-### Requisitos
-- Node.js 18+
-- Git instalado
-- Cuenta de GitHub (para el backend del CMS)
-
-### 1. Crea tu proyecto
-Puedes usar **GitHub CLI** para clonar esta plantilla directamente:
-
-```bash
-# Clonar el repositorio
-gh repo clone herwingx/docs-starlight mis-docs
-
-# Entrar al directorio
-cd mis-docs
-```
-
-### 2. Instalar dependencias
-```bash
-npm install
-```
-
-### 3. Iniciar Servidor de Desarrollo
-```bash
-npm run dev
-```
-
-**URLs Locales:**
-- 📖 **Docs:** `http://localhost:4321`
-- 🎛️ **Admin:** `http://localhost:4321/admin/`
+El sitio está diseñado para ser **Autónomo**:
+- 🤖 **Auto-etiquetado**: Un script detecta posts recientes (< 7 días) y les pone la etiqueta `Nuevo`.
+- 📅 **Auto-fechado**: El CMS sugiere la fecha de hoy automáticamente.
+- 🏠 **Home Dinámico**: La portada se actualiza sola con lo último que publico.
 
 ---
 
-## 🏗️ Arquitectura
+## 📂 Organización del Conocimiento
 
-```mermaid
-graph TD
-    A[Escritor / Editor] -->|Vía GUI| B[Sveltia CMS]
-    A -->|Vía Código| C[VS Code / Git]
-    
-    subgraph Control de Versiones
-    B -->|Commit cambios| D[Repositorio GitHub]
-    C -->|Commit cambios| D
-    end
-    
-    subgraph Build y Deploy
-    D -->|Disparador| E[Pipeline CI/CD]
-    E -->|Build Archivos Estáticos| F[Astro Starlight]
-    F -->|Deploy| G[Proveedor de Hosting]
-    end
-    
-    G -->|Servir| H[PWA / Web App]
-```
+Todo el contenido vive en `src/content/docs/`. Está dividido en 4 pilares:
+
+| Carpeta       | Icono | Propósito                                                                 |
+| :------------ | :---- | :------------------------------------------------------------------------ |
+| `/frontend`   | 🎨    | **Visual**: CSS, React, Efectos UI y trucos de diseño.                    |
+| `/backend`    | ⚙️    | **Lógica**: APIs, Bases de Datos, Arquitectura y Flujos de IA.            |
+| `/devops`     | 🚀    | **Infra**: Docker, Linux, VPS, Seguridad y Redes.                         |
+| `/proyectos`  | 🧪    | **Lab**: Configs personales (Dotfiles), Setup del sitio y experimentos.   |
 
 ---
 
-## 📦 Opciones de Despliegue
+## 🤖 Automatización y Scripts
 
-Esta plantilla es agnóstica a la nube. Puedes desplegarla donde sea que se soporten sitios estáticos.
+El proyecto cuenta con un pipeline de CI/CD local integrado en `npm`.
 
-| Plataforma           | Configuración                       | Comando         |
-| :------------------- | :---------------------------------- | :-------------- |
-| **Cloudflare Pages** | Conectar Repo → Preset: `Astro`     | `npm run build` |
-| **GitHub Pages**     | Settings → Source: `GitHub Actions` | `npm run build` |
-| **Vercel**           | Import Project → Preset: `Astro`    | `npm run build` |
-| **Netlify**          | Import Project → Preset: `Astro`    | `npm run build` |
+### Script de Badges (`scripts/auto-badges.mjs`)
+Este script se ejecuta automáticamente antes de `dev` y `build`.
+1.  Escanea todos los archivos `.mdx`.
+2.  Lee la fecha del frontmatter (`date: YYYY-MM-DD`).
+3.  Si el post tiene **menos de 7 días**:
+    - Le inyecta `badge: { text: Nuevo, variant: success }` en el sidebar.
+4.  Si el post ya es viejo:
+    - Le quita el badge automáticamente.
 
-### Usando GitHub CLI para Deploy (Ejemplo)
-Si quieres configurar GitHub Pages rápidamente:
-
-```bash
-# Habilitar GitHub Pages vía Actions
-gh repo edit --enable-pages --source-branch main --source-path /
-```
+> **Nota:** Si pones un badge manual (ej: "Popular"), el script lo respeta y no lo toca.
 
 ---
 
-## 📝 Gestión de Contenido
+## 📝 Gestión de Contenido (CMS)
 
-### Usando el CMS Visual
-1. Navega a `/admin/`.
-2. Inicia sesión con tu cuenta de GitHub.
-3. Crea o edita colecciones visualmente.
-4. Las actualizaciones se commitean automáticamente a tu repo.
+Puedes escribir posts de dos formas:
 
-### Edición Manual (MDX)
-Crea nuevos archivos `.mdx` en `src/content/docs/`:
+### A. Vía CMS (Recomendado)
+Visita `/admin/` en tu entorno local o producción.
+- **Login:** Automático (Local) o vía GitHub (Prod).
+- **Ventaja:** Autocompleta fechas y valida campos requeridos.
 
+### B. Vía Código (VS Code)
+Crea un archivo `.mdx` en la carpeta correspondiente.
+
+**Plantilla Mínima:**
 ```mdx
 ---
-title: Mi Nueva Página
-description: Una descripción para SEO
+title: Mi Nuevo Experimento
+date: "2026-02-04"   # ¡Importante! Usa comillas y fecha actual.
+description: Breve resumen de qué rompiste hoy.
+sidebar:
+  order: 10          # (Opcional) Orden manual
 ---
 
-# Hola Mundo
-Esta es una nueva página de documentación.
+Aquí empieza la magia...
 ```
 
 ---
 
-## 🔧 Comandos Útiles
+## ⚡ Cheatsheet de Mantenimiento
 
-| Comando           | Acción                                          |
-| :---------------- | :---------------------------------------------- |
-| `npm run dev`     | Iniciar servidor de desarrollo local            |
-| `npm run build`   | Compilar para producción                        |
-| `npm run preview` | Previsualizar la build de producción localmente |
-| `npm run dev:cms` | Correr servidor dev con proxy local para CMS    |
+¿Qué archivo debo editar si...?
+
+| Acción | Archivos a tocar | ¿Reiniciar server? |
+| :--- | :--- | :---: |
+| **Agregar un Artículo** | Solo crea el `.mdx` en la carpeta correcta. | No |
+| **Crear Subcarpeta** | Crea la carpeta + `index.mdx` dentro. | No |
+| **Nueva Categoría Raíz** | 1. Crea carpeta en `src/content/docs/`<br>2. Añade grupo en `astro.config.mjs`<br>3. Registra en `public/admin/config.yml` | **Sí** |
+| **Cambiar Portada** | `src/content/docs/index.mdx` | No |
+| **Cambiar CSS Global** | `src/styles/custom.css` | No |
+
+---
+
+## 🎨 Guía de Estilo: Índices y Subcarpetas
+
+Para mantener la navegación limpia, seguimos estas reglas en los archivos `index.mdx`:
+
+### 1. Índices de Categoría (Frontend, Backend...)
+Deben ser **invisibles** en el menú para no estorbar, pero accesibles desde el Home.
+
+```yaml
+---
+title: Título Épico
+sidebar:
+  hidden: true   # No mostrar en menú lateral
+prev: false      # No mostrar en paginación
+next: false
+---
+import { Badge } from '@astrojs/starlight/components';
+<Badge text="📂 Categoría" variant="note" size="medium" />
+```
+
+### 2. Índices de Subcarpetas (Cursor, Making Of...)
+Estos **SÍ** se muestran porque introducen un tema complejo.
+
+```yaml
+---
+title: Título del Tema
+sidebar:
+  label: Intro Tema  # Nombre corto para el menú
+  order: 1
+---
+import { Badge } from '@astrojs/starlight/components';
+<Badge text="📂 Subcarpeta" variant="note" size="medium" />
+```
+
+---
+
+## 🚀 Comandos de Laboratorio
+
+| Comando               | Descripción                                                                 |
+| :-------------------- | :-------------------------------------------------------------------------- |
+| `npm run dev`         | **Modo Dios.** Ejecuta script de badges + Levanta servidor local.           |
+| `npm run build`       | **Modo Producción.** Ejecuta badges + Compila el sitio estático.            |
+| `npm run preview`     | Previsualiza el sitio compilado.                                            |
+| `npm run cms`         | Levanta el proxy local para el CMS (si se requiere).                        |
 
 ---
 
 ## 🛠️ Stack Tecnológico
 
-**Frontend**
-- **Framework**: Astro 5
-- **Tema**: Starlight theme
-- **Estilos**: Variables CSS + Glassmorphism Personalizado
-
-**Herramientas**
-- **CMS**: Sveltia CMS (Basado en Git)
-- **Iconos**: Phosphor / Astro Icon
-- **PWA**: Plugin Vite PWA
+- **Core**: Astro 5 + Starlight
+- **Estilos**: Custom CSS (Variables CSS puro) + Tailwind (opcional)
+- **Automatización**: Node.js Scripts (Badges)
+- **Despliegue**: Cloudflare Pages / Vercel (Compatible)
 
 ---
 
-## 🤝 Contribuir y Licencia
+## 🤝 Contribución
 
-Siéntete libre de hacer un fork de este proyecto y usarlo como base para tu propia documentación.
+Si encuentras un error en mis notas o tienes una forma mejor de hacer algo:
 
-1. Fork del repo: `gh repo fork herwingx/docs-starlight`
-2. Crear rama: `git checkout -b feature/docs-increibles`
-3. Commit cambios: `git commit -m 'feat: agregar docs increibles'`
-4. Push: `git push origin feature/docs-increibles`
+1.  Haz un Fork.
+2.  Crea una rama (`feat/mejora-increible`).
+3.  Manda un PR.
 
-Licenciado bajo **MIT**.
+---
+*Hecho con 🧪 y ☕ por Herwingx.*

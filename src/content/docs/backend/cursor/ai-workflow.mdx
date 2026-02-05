@@ -1,0 +1,68 @@
+---
+title: Flujo de Desarrollo con IA (Cursor + Claude)
+date: "2026-02-02"
+description: Cómo integro la inteligencia artificial para programar 10x más rápido sin perder calidad.
+sidebar:
+  badge:
+    text: Nuevo
+    variant: success
+---
+
+import { Card, Steps } from '@astrojs/starlight/components';
+
+La IA no te va a reemplazar, pero un programador que use IA sí. Este es mi **protocolo exacto** para usar modelos LLM (como Claude 3.5 Sonnet o GPT-4) dentro de mi editor de código.
+
+No se trata de "autocompletar", se trata de **arquitectura asistida**.
+
+---
+
+## 🤖 El Stack de IA
+
+<Card title="Cursor Editor" icon="laptop">
+  Un fork de VS Code con IA nativa. Entiende todo tu repositorio, no solo el archivo abierto.
+</Card>
+
+---
+
+## ⚡ Mi Workflow (El "Prompt Engineering" Técnico)
+
+Así es como paso de una idea a código en producción:
+
+<Steps>
+
+1.  **Contexto es Rey (.cursorrules)**
+
+    Crea un archivo `.cursorrules` en la raíz. Es como darle personalidad a la IA. Dile qué eres (Senior Dev), qué stack usas y qué odias.
+
+    ```markdown
+    Actúa como experto en React y TypeScript.
+    - Prefiere componentes funcionales.
+    - Usa Tailwind para estilos.
+    - NUNCA uses `any`.
+    ```
+
+2.  **Iteración "Composer" (Cmd + I)**
+
+    No escribas código línea por línea. Escribe la *intención* en lenguaje natural.
+
+    > *"Crea un componente de tarjeta que reciba 'title' e 'image'. Debe tener efecto hover y ser responsive."*
+
+3.  **Review Humano (Critical Step)**
+
+    La IA es el becario más rápido del mundo, pero se equivoca. **Nunca aceptes código que no entiendas**.
+    
+    *   ¿Importó librerías innecesarias?
+    *   ¿Manejó los errores?
+    *   ¿Es seguro?
+
+4.  **Refactorización**
+
+    Usa la IA para limpiar, no solo para crear.
+    
+    > *"Revisa este archivo. Encuentra duplicidad de código y extráelo a un hook personalizado."*
+
+</Steps>
+
+:::note[Conclusión]
+La IA escribe el código, tú diseñas la solución. Tu valor como desarrollador ahora está en tu capacidad de **juzgar y orquestar**, no en memorizar sintaxis.
+:::

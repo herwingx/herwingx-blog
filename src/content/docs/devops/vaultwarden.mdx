@@ -1,0 +1,85 @@
+---
+title: Tu Gestor de Contraseñas Propio (Vaultwarden)
+date: 2026-02-04
+description: Guía definitiva para desplegar Bitwarden self-hosted con Docker, HTTPS y backups automáticos.
+sidebar:
+  order: 10
+  badge:
+    text: Popular
+    variant: tip
+---
+
+import { Steps, FileTree, Aside } from '@astrojs/starlight/components';
+
+¿Cansado de pagar suscripciones o desconfiar de la nube? Hoy vamos a montar **Vaultwarden**, la versión ligera y open source de Bitwarden, en tu propio servidor. Tienes el control total de tus datos.
+
+---
+
+## 📋 Prerrequisitos
+
+Lo que necesitas antes de empezar:
+
+-   [ ] Un servidor VPS (Ubuntu/Debian) o Raspberry Pi.
+-   [ ] Docker y Docker Compose instalados.
+-   [ ] Un dominio apuntando a tu servidor (ej: `vault.tudominio.com`).
+-   [ ] Nginx Proxy Manager o Traefik (opcional, pero recomendado).
+
+---
+
+## 🚀 Despliegue Paso a Paso
+
+<Steps>
+
+1.  **Estructura de Directorios**
+
+    Vamos a mantener el orden. Crea una carpeta para tus servicios.
+
+    <FileTree>
+    - docker
+      - vaultwarden
+        - docker-compose.yml
+        - .env
+    </FileTree>
+
+2.  **Configuración del Docker Compose**
+
+    Crea el archivo `docker-compose.yml` con esta configuración optimizada:
+
+    ```yaml title="docker-compose.yml"
+    version: '3'
+    services:
+      vaultwarden:
+        image: vaultwarden/server:latest
+        container_name: vaultwarden
+        restart: always
+        volumes:
+          - ./vw-data:/data
+        environment:
+          - WEBSOCKET_ENABLED=true
+        ports:
+          - 8080:80
+    ```
+
+3.  **Arrancar el servicio**
+
+    Ejecuta el contenedor en segundo plano:
+
+    ```bash
+    docker-compose up -d
+    ```
+
+4.  **Configurar Reverse Proxy (HTTPS)**
+
+    :::danger[Seguridad Crítica]
+    Vaultwarden **requiere HTTPS** para funcionar. El cifrado de las contraseñas se hace en el navegador y sin HTTPS fallará.
+    :::
+
+    Apunta tu Proxy Manager al puerto `8080` y activa el certificado SSL (Let's Encrypt).
+
+</Steps>
+
+## ✅ Verificación
+
+Entra a `https://vault.tudominio.com`. Deberías ver la pantalla de inicio de sesión.
+
+> **Tip Pro:** Desactiva el registro de nuevos usuarios (`SIGNUPS_ALLOWED=false`) en las variables de entorno una vez hayas creado tu cuenta personal para evitar que extraños usen tu servidor.

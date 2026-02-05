@@ -1,0 +1,34 @@
+---
+title: Configurando .cursorrules
+description: Enséñale a la IA tu estilo de código y evita que cometa errores de Junior.
+sidebar:
+  order: 2
+  badge:
+    text: Esencial
+    variant: tip
+---
+
+El archivo `.cursorrules` es el secreto mejor guardado de Cursor. Es un archivo que pones en la raíz de tu proyecto y actúa como "System Prompt" global.
+
+## 📄 ¿Qué poner dentro?
+
+No pongas obviedades. Pon tus **líneas rojas**.
+
+```markdown title=".cursorrules"
+# Rol
+Actúa como experto en TypeScript y React (Next.js App Router).
+
+# Reglas de Estilo
+- NUNCA uses `export default`, usa exportaciones nombradas.
+- Prefiere interfaces sobre types.
+- Usa Tailwind CSS para estilos, nada de CSS Modules.
+
+# Comportamiento
+- Si ves un error, no te disculpes. Arréglalo.
+- Escribe código defensivo (valida inputs siempre).
+- Mantén los componentes pequeños (< 100 líneas).
+```
+
+## 🤖 ¿Por qué funciona?
+
+Cada vez que le pides algo a la IA (Cmd+K o Chat), Cursor lee este archivo silenciosamente y lo inyecta en el contexto. Es como si le susurraras al oído antes de cada respuesta: *"Recuerda que odio los `any`"*.

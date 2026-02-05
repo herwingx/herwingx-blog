@@ -1,141 +1,66 @@
 ---
-title: Arquitectura Técnica
-description: Stack tecnológico y configuración de seguridad (OAuth).
+title: "Deep Dive: Login Serverless"
+description: Cómo logré conectar un sitio estático con GitHub sin tener un servidor backend tradicional.
 sidebar:
   order: 3
 ---
 
-Documentación técnica sobre cómo está construido, desplegado y gestionado este sitio (`docs.herwingx.dev`).
+Este es uno de los temas más locos: **¿Cómo te logueas en un sitio que son puros archivos HTML?**
 
-## 🛠️ Stack Tecnológico
+Normalmente necesitas una base de datos y un servidor (Node, Python). Pero aquí usamos magia de la nube llamada **Cloudflare Workers**.
 
-| Componente | Tecnología | Propósito |
-|:-----------|:-----------|:----------|
-| **Core** | [Astro](https://astro.build) v5 | Framework web estático de alto rendimiento. |
-| **Tema** | [Starlight](https://starlight.astro.build) | Plantilla de documentación optimizada. |
-| **CMS** | [Sveltia CMS](https://github.com/sveltia/sveltia-cms) | Editor visual de contenido (Git-based). |
-| **Hosting** | [GitHub Pages](https://pages.github.com) | Alojamiento gratuito y rápido para sitios estáticos. |
-| **Auth** | [Cloudflare Workers](https://workers.cloudflare.com) | Proxy Serverless para autenticación OAuth segura. |
-| **Dominio** | [Cloudflare DNS](https://dash.cloudflare.com) | Gestión de DNS y SSL. |
+## 🧠 El Problema
 
----
+1.  Este sitio vive en GitHub Pages (es estático).
+2.  Quiero un panel de administrador (`/admin`) para escribir posts.
+3.  Ese panel necesita permiso para guardar en mi GitHub.
+4.  **GitHub dice:** "Ok, dame tu contraseña secreta".
+5.  **El problema:** Si pongo la contraseña en el sitio estático, ¡todo el mundo la puede ver! 😱
 
-## 🚀 Flujo de Despliegue (CI/CD)
+## 💡 La Solución: Un "Puente" Invisible
 
-El sitio utiliza **GitHub Actions** para construir y desplegar automáticamente cada vez que hay cambios en la rama `main`.
-
-```mermaid
-graph LR
-    A[✍️ Editor/CMS] -->|Commit & Push| B(GitHub Repo)
-    B -->|Trigger| C{GitHub Actions}
-    C -->|npm run build| D[Build Estático]
-    D -->|Deploy| E[GitHub Pages]
-    E -->|Servir| F[🌐 docs.herwingx.dev]
-```
-
-1. **Commit**: Se detecta un cambio en `main` (ya sea por push manual o desde el CMS).
-2. **Build**: GitHub Actions instala dependencias y ejecuta `npm run build`.
-3. **Deploy**: Los archivos generados en `dist/` se suben a GitHub Pages.
-
----
-
-## 🔐 Autenticación del CMS (OAuth)
-
-Para que el CMS pueda escribir en el repositorio, necesita un **token de acceso** de usuario. GitHub requiere un intercambio seguro de credenciales que no puede hacerse desde un sitio estático (frontend). Usamos un **Cloudflare Worker** como intermediario seguro.
-
-### Diagrama de Secuencia
+Usé un pequeño script que vive en la nube (Worker). Nadie ve el código de ese script, así que ahí guardo el secreto.
 
 ```mermaid
 sequenceDiagram
-    participant User as 👤 Usuario
-    participant CMS as 🖥️ Sveltia CMS
+    participant Yo as 👤 Yo
+    participant Web as 🖥️ Este Sitio
+    participant Puente as ☁️ El Worker (Secreto)
     participant GH as 🐙 GitHub
-    participant Worker as ☁️ Cloudflare Worker
 
-    User->>CMS: Click "Login with GitHub"
-    CMS->>GH: Redirige a GitHub (Authorize)
-    User->>GH: Acepta permisos
-    GH->>CMS: Redirige con "Code" temporal
-    CMS->>Worker: Envía Code
-    Note over Worker: Tiene el CLIENT_SECRET 🔒
-    Worker->>GH: Intercambia Code por Token
-    GH->>Worker: Responde Access Token
-    Worker->>CMS: Entrega Token al CMS
-    CMS->>GH: Usa Token para leer/escribir repo
+    Yo->>Web: Click "Login"
+    Web->>GH: "Hola GitHub, soy Herwingx"
+    GH->>Web: "Ok, toma este código temporal: ABC-123"
+    Web->>Puente: "Toma el código ABC-123 (y no mires)"
+    Note over Puente: Aquí ocurre la magia ✨
+    Puente->>GH: "Tengo el código ABC-123 y SOY EL DUEÑO REAL"
+    GH->>Puente: "Verificado. Toma la llave maestra 🔑"
+    Puente->>Web: "Aquí tienes la llave, úsala para guardar posts"
 ```
 
-### Configuración de Seguridad
+### ¿Te explotó la cabeza? 🤯
 
-#### 1. GitHub OAuth App
-- **Ubicación**: GitHub Settings > Developer Settings > OAuth Apps.
-- **Configuración clave**:
-  - `Homepage URL`: `https://docs.herwingx.dev`
-  - `Callback URL`: `https://docs.herwingx.workers.dev/callback` (apunta al worker).
+Esto se llama **OAuth Flow** y es lo que usan todos (Google, Facebook) para iniciar sesión en apps. Si quieres aprender a hacerlo tú mismo, revisa mis tutoriales de [Backend](/backend/).
 
-#### 2. Cloudflare Worker (`docs-oauth`)
-Es un script serverless que actúa como "puente". Maneja el intercambio de token y el `postMessage` específico que espera Sveltia CMS.
+---
 
-<details>
-<summary>⚡ Ver código del Worker (worker.js)</summary>
+## 🛠️ Código Real del Worker
+
+Para los curiosos, así se ve el código JavaScript que hace de puente:
 
 ```javascript
-/* Cloudflare Worker para OAuth Github <-> CMS */
-const CLIENT_ID = 'Ov23liuRjoGP3vZ9KU9u'; // ID Público
-const CLIENT_SECRET = 'TU_SECRET_EN_WORKER'; // Configurar en Cloudflare
-
+// Este código corre en la red de Cloudflare, no en tu navegador
 export default {
   async fetch(req) {
-    const url = new URL(req.url);
-
-    // 1. Redirección inicial
-    if (url.pathname === '/auth') {
-      return Response.redirect(
-        `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=repo,user`,
-        302
-      );
-    }
-
-    // 2. Callback y Handshake con CMS
-    if (url.pathname === '/callback') {
-      const code = url.searchParams.get('code');
-      try {
-        const resp = await fetch('https://github.com/login/oauth/access_token', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json', 'accept': 'application/json' },
-          body: JSON.stringify({ client_id: CLIENT_ID, client_secret: CLIENT_SECRET, code })
-        });
-        const result = await resp.json();
-        
-        if (result.error) return new Response(JSON.stringify(result), { status: 400 });
-
-        // Mensaje formateado para Sveltia/Decap
-        const msg = `authorization:github:success:${JSON.stringify({
-          token: result.access_token, provider: 'github'
-        })}`;
-
-        return new Response(
-          `<script>
-            window.opener.postMessage("${msg}", "*");
-            setTimeout(() => window.close(), 800);
-          </script>`, 
-          { headers: { 'content-type': 'text/html;charset=UTF-8' } }
-        );
-      } catch (e) { return new Response(e.message, { status: 500 }); }
-    }
-    return new Response('Worker Ready', { status: 200 });
+    // Cuando el sitio pide autorización...
+    // ¡Hacemos el intercambio secreto aquí!
+    const clientSecret = env.SECRET; // Nadie ve esto
+    // ... lógica compleja de fetch a GitHub ...
+    return new Response("Toma tu token 🔑");
   }
 }
 ```
-</details>
 
----
-
-## 🛡️ Guía de Seguridad (Qué NO tocar)
-
-1. **Client Secret**: Jamás lo pongas en `astro.config.mjs` o `config.yml`. Solo debe existir en el código del Worker.
-2. **Worker URL**: Puedes cambiarla en `public/admin/config.yml` si creas un nuevo worker.
-3. **Repo Privado (Opcional)**: Si decides hacer el repo privado, el flujo sigue funcionando, pero necesitarás pagar GitHub Pro para usar Pages en repos privados o usar otro host como Vercel/Netlify.
-
----
-
-
+:::tip[Aprende esto]
+Entender estos flujos te separa de ser un "Junior" a ser un "Senior". No es solo escribir código, es entender **sistemas**.
+:::

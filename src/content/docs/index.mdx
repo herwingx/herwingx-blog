@@ -1,80 +1,64 @@
 ---
-title: Bienvenido a Herwingx Docs
-description: Documentación personal de desarrollo - Frontend, Backend y DevOps
+title: Herwingx Labs
+description: Experimentos de código, setups de servidor y tutoriales para developers curiosos.
 template: splash
 hero:
-  tagline: Base de conocimientos personal sobre desarrollo de software, arquitectura y DevOps.
+  tagline: "Donde rompo cosas para aprender cómo funcionan. Tutoriales prácticos sobre desarrollo, servidores caseros y vida en la terminal."
+  image:
+    file: ../../assets/logo-dark.svg
   actions:
-    - text: Explorar Documentación
-      link: /proyectos/herwingx-docs/
-      icon: right-arrow
+    - text: Entrar al Laboratorio
+      link: /intro/
+      icon: rocket
       variant: primary
     - text: Ver en GitHub
-      link: https://github.com/herwingx/docs-starlight
+      link: https://github.com/herwingx
       icon: external
+      variant: minimal
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import LatestPosts from '../../components/LatestPosts.astro';
 
-> **"Code is like humor. When you have to explain it, it’s bad."** — Cory House.
+## 🧪 Recién Salido del Horno
 
-<div class="hero-bg"></div>
+Lo último que he publicado en el laboratorio:
 
-## 🚀 Áreas de Conocimiento
-
-<CardGrid stagger>
-  <Card title="Frontend" icon="pencil">
-    React, CSS, TypeScript y diseño de interfaces modernas.
-    <br/>
-    [**Explorar →**](/frontend/)
-  </Card>
-  <Card title="Backend" icon="setting">
-    Node.js, APIs, bases de datos y arquitectura de servidor.
-    <br/>
-    [**Explorar →**](/backend/)
-  </Card>
-  <Card title="DevOps" icon="rocket">
-    CI/CD, Docker, Cloudflare y automatización de procesos.
-    <br/>
-    [**Explorar →**](/devops/)
-  </Card>
-  <Card title="Panel Admin" icon="document">
-    Gestión de contenido visual mediante CMS.
-    <br/>
-    [**Ir al CMS →**](/admin/)
-  </Card>
-</CardGrid>
+<LatestPosts />
 
 ---
 
-## 📖 Guías Destacadas
+## 📂 Explora por Categoría
+
+Aquí guardo mis notas ordenadas para que no se me olviden (y para que tú las uses).
 
 <CardGrid>
   <LinkCard
-    title="GitHub Actions"
-    description="Automatiza tus despliegues con workflows profesionales."
-    href="/devops/github-actions/"
+    title="🎨 Frontend"
+    description="Efectos CSS, React y trucos de UI que uso en mis videos."
+    href="/frontend/glassmorphism/"
+    icon="pencil"
   />
   <LinkCard
-    title="Cloudflare Tunnels"
-    description="Exponer servicios locales de forma segura y rápida."
-    href="/devops/cloudflare-tunnels/"
+    title="⚙️ Backend"
+    description="APIs, Bases de Datos y la lógica que nadie ve pero todos necesitan."
+    href="/backend/cursor/"
+    icon="setting"
+  />
+  <LinkCard
+    title="🚀 DevOps"
+    description="Despliegues, Linux y automatización. Donde ocurre la magia real."
+    href="/devops/zsh-terminal/"
+    icon="rocket"
+  />
+  <LinkCard
+    title="🧪 Lab & Setups"
+    description="Mis dotfiles, temas de terminal y herramientas secretas."
+    href="/proyectos/herwingx-docs/"
+    icon="flask"
   />
 </CardGrid>
 
----
-
-## 🛠️ Sobre esta documentación
-
-Esta base de conocimientos sigue el **Estándar de Documentación Premium** y contiene:
-
-| Sección | Descripción |
-| :--- | :--- |
-| **Aprendizajes** | Descubrimientos técnicos y notas de estudio. |
-| **Guías** | Tutoriales paso a paso para configuraciones. |
-| **Referencias** | Snippets y comandos de uso frecuente. |
-| **Patrones** | Mejores prácticas y convenciones de código. |
-
-:::tip[Búsqueda Rápida]
-Usa `Ctrl+K` o `Cmd+K` para buscar en toda la documentación al instante.
+:::tip[Fun Fact del Día]
+Este sitio web no tiene servidor backend. Usa una función "serverless" oculta para loguearme. [Descubre el truco aquí](/proyectos/herwingx-docs/arquitectura/).
 :::
