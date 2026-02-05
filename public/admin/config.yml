@@ -17,6 +17,11 @@ collections:
     nested:
       depth: 100
       summary: "{{dirname}} / {{title}}"
+    meta:
+      path:
+        label: Ruta
+        widget: string
+        index_file: index
     create: true
     delete: true
     slug: "{{slug}}"
@@ -68,6 +73,11 @@ collections:
     nested:
       depth: 100
       summary: "{{dirname}} / {{title}}"
+    meta:
+      path:
+        label: Ruta
+        widget: string
+        index_file: index
     create: true
     delete: true
     slug: "{{slug}}"
@@ -119,6 +129,11 @@ collections:
     nested:
       depth: 100
       summary: "{{dirname}} / {{title}}"
+    meta:
+      path:
+        label: Ruta
+        widget: string
+        index_file: index
     create: true
     delete: true
     slug: "{{slug}}"
@@ -170,6 +185,11 @@ collections:
     nested:
       depth: 100
       summary: "{{dirname}} / {{title}}"
+    meta:
+      path:
+        label: Ruta
+        widget: string
+        index_file: index
     create: true
     delete: true
     slug: "{{slug}}"
