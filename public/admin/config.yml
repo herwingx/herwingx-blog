@@ -11,17 +11,12 @@ media_folder: src/assets/images
 public_folder: /src/assets/images
 
 collections:
+  # ═══════════════════════════════════════════════════════════════
+  # 🎨 FRONTEND
+  # ═══════════════════════════════════════════════════════════════
   - name: frontend
     label: "🎨 Frontend"
     folder: src/content/docs/frontend
-    nested:
-      depth: 100
-      summary: "{{dirname}} / {{title}}"
-    meta:
-      path:
-        label: Ruta
-        widget: string
-        index_file: index
     create: true
     delete: true
     slug: "{{slug}}"
@@ -35,7 +30,6 @@ collections:
           widget: datetime,
           format: "YYYY-MM-DD",
           time_format: false,
-          default: "{{now}}",
           required: false,
         }
       - {
@@ -62,22 +56,17 @@ collections:
                   label: Variante,
                   name: variant,
                   widget: select,
-                  options: [tip, note, caution, danger],
+                  options: [tip, note, caution, danger, success],
                   required: false,
                 }
       - { label: Contenido, name: body, widget: markdown }
 
+  # ═══════════════════════════════════════════════════════════════
+  # ⚙️ BACKEND
+  # ═══════════════════════════════════════════════════════════════
   - name: backend
     label: "⚙️ Backend"
     folder: src/content/docs/backend
-    nested:
-      depth: 100
-      summary: "{{dirname}} / {{title}}"
-    meta:
-      path:
-        label: Ruta
-        widget: string
-        index_file: index
     create: true
     delete: true
     slug: "{{slug}}"
@@ -91,7 +80,6 @@ collections:
           widget: datetime,
           format: "YYYY-MM-DD",
           time_format: false,
-          default: "{{now}}",
           required: false,
         }
       - {
@@ -118,22 +106,70 @@ collections:
                   label: Variante,
                   name: variant,
                   widget: select,
-                  options: [tip, note, caution, danger],
+                  options: [tip, note, caution, danger, success],
                   required: false,
                 }
       - { label: Contenido, name: body, widget: markdown }
 
+  - name: backend-cursor
+    label: "⚙️ Backend › 🤖 Cursor AI"
+    folder: src/content/docs/backend/cursor
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { label: Título, name: title, widget: string, required: true }
+      - {
+          label: Fecha,
+          name: date,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          time_format: false,
+          required: false,
+        }
+      - {
+          label: Descripción,
+          name: description,
+          widget: string,
+          required: true,
+        }
+      - label: Sidebar
+        name: sidebar
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - {
+              label: Etiqueta Menu,
+              name: label,
+              widget: string,
+              required: false,
+            }
+          - { label: Orden, name: order, widget: number, required: false }
+          - label: Badge
+            name: badge
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { label: Texto, name: text, widget: string, required: false }
+              - {
+                  label: Variante,
+                  name: variant,
+                  widget: select,
+                  options: [tip, note, caution, danger, success],
+                  required: false,
+                }
+      - { label: Contenido, name: body, widget: markdown }
+
+  # ═══════════════════════════════════════════════════════════════
+  # 🚀 DEVOPS
+  # ═══════════════════════════════════════════════════════════════
   - name: devops
     label: "🚀 DevOps"
     folder: src/content/docs/devops
-    nested:
-      depth: 100
-      summary: "{{dirname}} / {{title}}"
-    meta:
-      path:
-        label: Ruta
-        widget: string
-        index_file: index
     create: true
     delete: true
     slug: "{{slug}}"
@@ -147,7 +183,6 @@ collections:
           widget: datetime,
           format: "YYYY-MM-DD",
           time_format: false,
-          default: "{{now}}",
           required: false,
         }
       - {
@@ -174,22 +209,17 @@ collections:
                   label: Variante,
                   name: variant,
                   widget: select,
-                  options: [tip, note, caution, danger],
+                  options: [tip, note, caution, danger, success],
                   required: false,
                 }
       - { label: Contenido, name: body, widget: markdown }
 
+  # ═══════════════════════════════════════════════════════════════
+  # 📘 PROYECTOS
+  # ═══════════════════════════════════════════════════════════════
   - name: proyectos
     label: "📘 Proyectos"
     folder: src/content/docs/proyectos
-    nested:
-      depth: 100
-      summary: "{{dirname}} / {{title}}"
-    meta:
-      path:
-        label: Ruta
-        widget: string
-        index_file: index
     create: true
     delete: true
     slug: "{{slug}}"
@@ -203,7 +233,39 @@ collections:
           widget: datetime,
           format: "YYYY-MM-DD",
           time_format: false,
-          default: "{{now}}",
+          required: false,
+        }
+      - {
+          label: Descripción,
+          name: description,
+          widget: string,
+          required: true,
+        }
+      - label: Sidebar
+        name: sidebar
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { label: Orden, name: order, widget: number, required: false }
+      - { label: Contenido, name: body, widget: markdown }
+
+  - name: proyectos-herwingx-docs
+    label: "📘 Proyectos › 📚 Herwingx Docs"
+    folder: src/content/docs/proyectos/herwingx-docs
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { label: Título, name: title, widget: string, required: true }
+      - {
+          label: Fecha,
+          name: date,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          time_format: false,
           required: false,
         }
       - {
@@ -227,6 +289,9 @@ collections:
           - { label: Orden, name: order, widget: number, required: false }
       - { label: Contenido, name: body, widget: markdown }
 
+  # ═══════════════════════════════════════════════════════════════
+  # ⚙️ CONFIGURACIÓN
+  # ═══════════════════════════════════════════════════════════════
   - name: config
     label: "⚙️ Configuración"
     files:
