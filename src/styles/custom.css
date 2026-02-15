@@ -1,3 +1,396 @@
 /* 
- * Tema: Starlight Original
+ * 🎨 PREMIUM DEVELOPER THEME FOR ASTRO STARLIGHT
+ * Design System: "Deep Void" (Dark) & "Crisp Air" (Light)
+ * Optimized for Readability & Visual Harmony
  */
+
+/* Import Fonts: Inter & JetBrains Mono */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+	--sl-font: 'Inter', system-ui, -apple-system, sans-serif;
+	--sl-font-mono: 'JetBrains Mono', monospace;
+	--sl-text-base: 17px; /* Slightly larger for modern readability */
+	--sl-line-height: 1.75; /* Perfect relaxed rhythm */
+}
+
+/* =========================================
+   1. THEME DEFINITIONS (Harmonized Palette)
+   ========================================= */
+
+/* Dark Theme - Deep Void (High Contrast, Low Eye Strain) */
+[data-theme='dark'] {
+	/* Palette - Zinc Scale */
+	--theme-bg-base: #09090b;   /* Zinc 950 */
+	--theme-surface: rgba(24, 24, 27, 0.8); /* Zinc 900 */
+	--theme-border: rgba(255, 255, 255, 0.08); 
+	--theme-accent-glow: rgba(59, 130, 246, 0.2); /* Blue 500 Glow */
+	
+	/* Starlight Overrides - TYPOGRAPHY ENGINEERING */
+	--sl-color-bg: var(--theme-bg-base);
+	--sl-color-bg-nav: rgba(9, 9, 11, 0.9);
+	--sl-color-bg-sidebar: rgba(9, 9, 11, 0.6);
+	--sl-color-hairline: var(--theme-border);
+	
+	/* Text Colors - Engineered for Dark Mode Readability */
+	--sl-color-white: #fafafa;  /* Zinc 50 */
+	--sl-color-gray-1: #e4e4e7; /* Zinc 200 */
+	--sl-color-gray-2: #a1a1aa; /* Zinc 400 */
+	--sl-color-gray-3: #71717a; /* Zinc 500 */
+	--sl-color-gray-4: #3f3f46; /* Zinc 700 */
+	--sl-color-gray-5: #27272a; /* Zinc 800 */
+	--sl-color-gray-6: #18181b; /* Zinc 900 */
+	--sl-color-black: #09090b;  /* Zinc 950 */
+
+	/* Accents - "Interstellar" (Blue -> Violet) */
+	--sl-color-accent-low: #172554;   /* Blue 950 - Deep background */
+	--sl-color-accent: #3b82f6;       /* Blue 500 - Primary Action */
+	--sl-color-accent-high: #8b5cf6;  /* Violet 500 - Highlight/Hover */
+	
+	/* Gradients */
+	--gradient-hero: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+	--gradient-button: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%); /* Blue to Indigo */
+}
+
+/* Light Theme - Crisp Air (Professional & Clean) */
+[data-theme='light'] {
+	/* Palette */
+	--theme-bg-base: #ffffff;
+	--theme-surface: rgba(250, 250, 250, 0.9);
+	--theme-border: rgba(0, 0, 0, 0.06);
+	--theme-accent-glow: rgba(37, 99, 235, 0.15);
+
+	/* Starlight Overrides */
+	--sl-color-bg: var(--theme-bg-base);
+	--sl-color-bg-nav: rgba(255, 255, 255, 0.95);
+	--sl-color-bg-sidebar: rgba(255, 255, 255, 0.8);
+	--sl-color-hairline: var(--theme-border);
+
+	/* Text Colors - Engineered for Light Mode Contrast */
+	--sl-color-white: #09090b;  /* Zinc 950 */
+	--sl-color-gray-1: #27272a; /* Zinc 800 */
+	--sl-color-gray-2: #52525b; /* Zinc 600 */
+	--sl-color-gray-3: #a1a1aa; /* Zinc 400 */
+	--sl-color-gray-4: #e4e4e7; /* Zinc 200 */
+	--sl-color-gray-5: #f4f4f5; /* Zinc 100 */
+	--sl-color-gray-6: #ffffff;
+	--sl-color-black: #ffffff;
+
+	/* Accents */
+	--sl-color-accent-low: #eff6ff;   /* Blue 50 */
+	--sl-color-accent: #2563eb;       /* Blue 600 */
+	--sl-color-accent-high: #7c3aed;  /* Violet 600 */
+
+	/* Gradients */
+	--gradient-hero: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+	--gradient-button: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+}
+
+/* =========================================
+   CORE LAYOUT & ATMOSPHERE
+   ========================================= */
+
+body {
+	background-color: var(--sl-color-bg);
+	background-image: 
+		radial-gradient(at 50% 0%, rgba(var(--sl-color-accent), 0.06) 0px, transparent 60%);
+	background-attachment: fixed;
+}
+
+/* Tech Grid Background */
+body::before {
+	content: "";
+	position: fixed;
+	top: 0; left: 0; width: 100%; height: 100%;
+	background-image:
+		linear-gradient(rgba(120, 120, 120, 0.03) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(120, 120, 120, 0.03) 1px, transparent 1px);
+	background-size: 50px 50px;
+	z-index: -1;
+	mask-image: radial-gradient(circle at 50% 0%, black 30%, transparent 80%);
+	pointer-events: none;
+	animation: gridMove 120s linear infinite;
+}
+
+@keyframes gridMove {
+	0% { transform: translateY(0); }
+	100% { transform: translateY(50px); }
+}
+
+/* Header & Sidebar */
+header.header {
+	background-color: var(--sl-color-bg-nav) !important;
+	backdrop-filter: blur(16px) !important;
+	-webkit-backdrop-filter: blur(16px) !important;
+	border-bottom: 1px solid var(--sl-color-hairline) !important;
+}
+
+.sidebar-pane, .right-sidebar-panel {
+	background-color: transparent !important;
+	border-right: 1px solid var(--sl-color-hairline);
+}
+
+.right-sidebar-panel {
+	border-right: none;
+	border-left: 1px solid var(--sl-color-hairline);
+}
+
+/* =========================================
+   TYPOGRAPHY ENGINEERING (Perfect Rhythm)
+   ========================================= */
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+	color: var(--sl-color-white) !important;
+	letter-spacing: -0.025em;
+	position: relative;
+}
+
+h1#_top {
+	font-weight: 800 !important;
+	letter-spacing: -0.04em;
+	line-height: 1.1;
+	background: var(--gradient-hero);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	margin-bottom: 1.5rem !important;
+	filter: drop-shadow(0 0 30px var(--theme-accent-glow));
+}
+
+/* Body Text - The "Reading" Experience */
+.content-panel p {
+	margin-bottom: 1.5em;
+	font-weight: 400;
+	color: var(--sl-color-gray-1); /* High readability */
+}
+
+/* Strong emphasis */
+strong, b {
+	font-weight: 700;
+	color: var(--sl-color-white); /* Pop out from gray body */
+}
+
+/* Lists */
+.content-panel ul, .content-panel ol {
+	color: var(--sl-color-gray-2);
+}
+
+.content-panel li {
+	margin-bottom: 0.5em;
+}
+
+/* Links - Interactive Underscore */
+.content-panel a:not(.card a):not(.action) {
+	color: var(--sl-color-accent);
+	text-decoration: none;
+	background-image: linear-gradient(var(--sl-color-accent), var(--sl-color-accent));
+	background-position: 0% 100%;
+	background-repeat: no-repeat;
+	background-size: 0% 2px;
+	transition: background-size 0.3s ease, color 0.2s ease;
+	font-weight: 500;
+}
+
+.content-panel a:not(.card a):not(.action):hover {
+	background-size: 100% 2px;
+	color: var(--sl-color-accent-high);
+}
+
+/* Inline Code */
+:not(pre) > code {
+	font-family: var(--sl-font-mono);
+	background-color: rgba(var(--sl-color-accent), 0.08) !important;
+	color: var(--sl-color-accent) !important;
+	border: 1px solid rgba(var(--sl-color-accent), 0.2);
+	border-radius: 6px;
+	padding: 0.15em 0.4em;
+	font-size: 0.875em;
+	font-weight: 500;
+}
+
+/* =========================================
+   COMPONENTS
+   ========================================= */
+
+/* Cards */
+.card, .link-card {
+	background: var(--theme-surface) !important;
+	backdrop-filter: blur(12px);
+	border: 1px solid var(--sl-color-hairline) !important;
+	border-radius: 16px !important;
+	box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+	transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.card:hover, .link-card:hover {
+	transform: translateY(-4px);
+	border-color: var(--sl-color-accent) !important;
+	background: linear-gradient(145deg, var(--theme-surface), rgba(var(--sl-color-accent), 0.05)) !important;
+	box-shadow: 
+		0 20px 40px -10px rgba(0, 0, 0, 0.2), 
+		0 0 20px var(--theme-accent-glow) !important;
+}
+
+/* Hero Logo */
+.hero img {
+	filter: drop-shadow(0 0 30px var(--theme-accent-glow));
+	animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-8px); }
+}
+
+/* Code Blocks (Mini Terminals) */
+.expressive-code .frame {
+	border-radius: 12px !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.3) !important;
+	background: #0e0e11 !important;
+}
+
+.expressive-code .header {
+	background-color: #18181b !important;
+	border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+.expressive-code .header::before {
+	content: "";
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #ef4444; 
+	box-shadow: 18px 0 0 #f59e0b, 36px 0 0 #10b981;
+	margin-left: 12px;
+	opacity: 0.8;
+}
+
+/* Admonitions */
+.starlight-aside {
+	border: 1px solid var(--sl-color-hairline) !important;
+	border-radius: 12px !important;
+	border-left-width: 1px !important;
+	background-color: var(--theme-surface) !important;
+	backdrop-filter: blur(8px);
+	box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+	position: relative;
+	overflow: hidden;
+}
+
+.starlight-aside::before {
+	content: "";
+	position: absolute;
+	left: 0; top: 0; bottom: 0; width: 4px;
+	background: var(--sl-color-accent);
+}
+
+.starlight-aside__title {
+	font-weight: 700 !important;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+	background: var(--sl-color-gray-3);
+	border-radius: 4px;
+	border: 2px solid var(--sl-color-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--sl-color-gray-2); }
+
+/* =========================================
+   9. BUTTONS & ACTIONS (Ultra-Integrated Glass)
+   ========================================= */
+
+/* Base reset for Starlight actions */
+.action {
+	border-radius: 12px !important;
+	padding: 0.9rem 1.8rem !important;
+	font-weight: 600 !important;
+	letter-spacing: -0.01em;
+	transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1) !important;
+	text-decoration: none !important;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+/* Primary Button - "Cyberpunk Entrance" */
+.action.primary {
+	background: rgba(59, 130, 246, 0.15) !important; /* Semi-transparent blue */
+	color: #60a5fa !important; /* Sky 400 */
+	border: 1px solid rgba(96, 165, 250, 0.4) !important; /* Glowing border */
+	backdrop-filter: blur(10px) !important;
+	-webkit-backdrop-filter: blur(10px) !important;
+	box-shadow: 
+		0 0 15px rgba(59, 130, 246, 0.1),
+		inset 0 0 10px rgba(59, 130, 246, 0.1) !important;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Pulse Animation for Primary Entrance */
+.action.primary::after {
+	content: "";
+	position: absolute;
+	top: -50%; left: -50%; width: 200%; height: 200%;
+	background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+	animation: pulseGlow 4s infinite ease-in-out;
+	pointer-events: none;
+}
+
+@keyframes pulseGlow {
+	0%, 100% { opacity: 0.3; transform: scale(1); }
+	50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+.action.primary:hover {
+	background: rgba(59, 130, 246, 0.25) !important;
+	border-color: #60a5fa !important;
+	color: white !important;
+	transform: translateY(-3px) scale(1.02);
+	box-shadow: 
+		0 0 25px rgba(59, 130, 246, 0.3),
+		0 10px 20px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Secondary/Minimal Button - "Ghost Glass" */
+.action.minimal {
+	background: rgba(255, 255, 255, 0.03) !important;
+	color: var(--sl-color-gray-2) !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	backdrop-filter: blur(8px) !important;
+}
+
+.action.minimal:hover {
+	background: rgba(255, 255, 255, 0.08) !important;
+	color: var(--sl-color-white) !important;
+	border-color: var(--sl-color-gray-3) !important;
+	transform: translateY(-2px);
+}
+
+/* Icon integration inside buttons */
+.action astro-icon {
+	width: 1.2em;
+	height: 1.2em;
+	transition: transform 0.3s ease;
+}
+
+.action.primary:hover astro-icon {
+	transform: translateX(3px) rotate(-5deg);
+}
+
+/* Social Icons in Header */
+.social-icons a {
+	color: var(--sl-color-gray-3) !important;
+	transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+	color: var(--sl-color-accent) !important;
+}
