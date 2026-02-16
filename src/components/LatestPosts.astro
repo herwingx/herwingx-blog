@@ -16,11 +16,6 @@ const latestDocs = allDocs
     return new Date(b.data.date!).getTime() - new Date(a.data.date!).getTime();
   })
   .slice(0, 3); // Tomar solo los 3 primeros
-
-console.log(
-  "Posts encontrados:",
-  latestDocs.map((d) => ({ id: d.id, date: d.data.date })),
-);
 ---
 
 <CardGrid stagger>
@@ -32,9 +27,9 @@ console.log(
           <br />
           <a
             href={`/${doc.id.replace(/\.mdx?$/, "")}/`}
-            style="text-decoration: none; font-weight: bold;"
+            class="read-more-btn"
           >
-            👉 Leer Tutorial
+            <span>👉</span> Leer Tutorial
           </a>
         </Card>
       ))

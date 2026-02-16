@@ -1,408 +1,512 @@
-/* 
- * 🎨 PREMIUM DEVELOPER THEME FOR ASTRO STARLIGHT
- * Design System: "Deep Void" (Dark) & "Crisp Air" (Light)
- * Optimized for Readability & Visual Harmony
- */
+/* ==========================================================================
+   1. FUENTES & RESET
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap');
 
-/* Import Fonts: Inter & JetBrains Mono */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
-
+/* ==========================================================================
+   2. PALETA & VARIABLES (HACKER / VOID THEME)
+   ========================================================================== */
 :root {
-	--sl-font: 'Inter', system-ui, -apple-system, sans-serif;
+	/* LIGHT MODE (Limpio, Técnico) */
+	--color-bg: #ffffff;
+	--color-bg-overlay: rgba(255, 255, 255, 0.9);
+	--color-border: #e4e4e7;
+	--color-text: #18181b;
+	--color-text-dim: #71717a;
+	--color-accent: #2563eb;
+	/* Azul Royal */
+	--card-bg: #fafafa;
+	--code-bg: #f4f4f5;
+	--code-header: #e4e4e7;
+}
+
+:root[data-theme='dark'] {
+	/* DARK MODE (Herwingx Labs / Void) */
+	--color-bg: #020202;
+	/* Negro casi puro */
+	--color-bg-overlay: rgba(2, 2, 2, 0.8);
+	--color-border: #27272a;
+	/* Zinc 800 */
+	--color-text: #f4f4f5;
+	--color-text-dim: #a1a1aa;
+
+	/* El Azul Eléctrico exacto de tu referencia */
+	--color-accent: #3b82f6;
+	--color-accent-glow: rgba(59, 130, 246, 0.5);
+
+	--card-bg: #0a0a0a;
+	/* Superficie apenas visible */
+	--code-bg: #09090b;
+	/* Fondo terminal */
+	--code-header: #18181b;
+	/* Header terminal */
+}
+
+/* ==========================================================================
+   3. STARLIGHT OVERRIDES (La base)
+   ========================================================================== */
+:root {
+	--sl-font-system: 'Inter', sans-serif;
 	--sl-font-mono: 'JetBrains Mono', monospace;
-	--sl-text-base: 17px; /* Slightly larger for modern readability */
-	--sl-line-height: 1.75; /* Perfect relaxed rhythm */
+
+	--sl-color-bg: var(--color-bg);
+	--sl-color-bg-nav: var(--color-bg-overlay);
+	--sl-color-bg-sidebar: var(--color-bg);
+	--sl-color-hairline: var(--color-border);
+	--sl-color-hairline-light: var(--color-border);
+
+	--sl-color-text: var(--color-text);
+	--sl-color-text-accent: var(--color-accent);
+
+	--sl-nav-height: 4rem;
 }
 
-/* =========================================
-   1. THEME DEFINITIONS (Harmonized Palette)
-   ========================================= */
-
-/* Dark Theme - Deep Void (High Contrast, Low Eye Strain) */
-[data-theme='dark'] {
-	/* Palette - Zinc Scale */
-	--theme-bg-base: #09090b;   /* Zinc 950 */
-	--theme-surface: rgba(24, 24, 27, 0.8); /* Zinc 900 */
-	--theme-border: rgba(255, 255, 255, 0.08); 
-	--theme-accent-glow: rgba(59, 130, 246, 0.2); /* Blue 500 Glow */
-	
-	/* Starlight Overrides - TYPOGRAPHY ENGINEERING */
-	--sl-color-bg: var(--theme-bg-base);
-	--sl-color-bg-nav: rgba(9, 9, 11, 0.9);
-	--sl-color-bg-sidebar: rgba(9, 9, 11, 0.6);
-	--sl-color-hairline: var(--theme-border);
-	
-	/* Text Colors - Engineered for Dark Mode Readability */
-	--sl-color-white: #fafafa;  /* Zinc 50 */
-	--sl-color-gray-1: #e4e4e7; /* Zinc 200 */
-	--sl-color-gray-2: #a1a1aa; /* Zinc 400 */
-	--sl-color-gray-3: #71717a; /* Zinc 500 */
-	--sl-color-gray-4: #3f3f46; /* Zinc 700 */
-	--sl-color-gray-5: #27272a; /* Zinc 800 */
-	--sl-color-gray-6: #18181b; /* Zinc 900 */
-	--sl-color-black: #09090b;  /* Zinc 950 */
-
-	/* Accents - "Interstellar" (Blue -> Violet) */
-	--sl-color-accent-low: #172554;   /* Blue 950 - Deep background */
-	--sl-color-accent: #3b82f6;       /* Blue 500 - Primary Action */
-	--sl-color-accent-high: #8b5cf6;  /* Violet 500 - Highlight/Hover */
-	
-	/* Gradients */
-	--gradient-hero: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-	--gradient-button: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%); /* Blue to Indigo */
+/* Ajustes globales */
+html {
+	scroll-behavior: smooth;
 }
-
-/* Light Theme - Crisp Air (Professional & Clean) */
-[data-theme='light'] {
-	/* Palette */
-	--theme-bg-base: #ffffff;
-	--theme-surface: rgba(250, 250, 250, 0.9);
-	--theme-border: rgba(0, 0, 0, 0.06);
-	--theme-accent-glow: rgba(37, 99, 235, 0.15);
-
-	/* Starlight Overrides */
-	--sl-color-bg: var(--theme-bg-base);
-	--sl-color-bg-nav: rgba(255, 255, 255, 0.95);
-	--sl-color-bg-sidebar: rgba(255, 255, 255, 0.8);
-	--sl-color-hairline: var(--theme-border);
-
-	/* Text Colors - Engineered for Light Mode Contrast */
-	--sl-color-white: #09090b;  /* Zinc 950 */
-	--sl-color-gray-1: #27272a; /* Zinc 800 */
-	--sl-color-gray-2: #52525b; /* Zinc 600 */
-	--sl-color-gray-3: #a1a1aa; /* Zinc 400 */
-	--sl-color-gray-4: #e4e4e7; /* Zinc 200 */
-	--sl-color-gray-5: #f4f4f5; /* Zinc 100 */
-	--sl-color-gray-6: #ffffff;
-	--sl-color-black: #ffffff;
-
-	/* Accents */
-	--sl-color-accent-low: #eff6ff;   /* Blue 50 */
-	--sl-color-accent: #2563eb;       /* Blue 600 */
-	--sl-color-accent-high: #7c3aed;  /* Violet 600 */
-
-	/* Gradients */
-	--gradient-hero: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-	--gradient-button: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
-}
-
-/* =========================================
-   CORE LAYOUT & ATMOSPHERE
-   ========================================= */
 
 body {
-	background-color: var(--sl-color-bg);
-	background-image: 
-		radial-gradient(at 50% 0%, rgba(var(--sl-color-accent), 0.06) 0px, transparent 60%);
-	background-attachment: fixed;
+	background-color: var(--color-bg);
 }
 
-/* Tech Grid Background */
-body::before {
-	content: "";
-	position: fixed;
-	top: 0; left: 0; width: 100%; height: 100%;
-	background-image:
-		linear-gradient(rgba(120, 120, 120, 0.03) 1px, transparent 1px),
-		linear-gradient(90deg, rgba(120, 120, 120, 0.03) 1px, transparent 1px);
-	background-size: 50px 50px;
-	z-index: -1;
-	mask-image: radial-gradient(circle at 50% 0%, black 30%, transparent 80%);
-	pointer-events: none;
-	animation: gridMove 120s linear infinite;
-}
-
-@keyframes gridMove {
-	0% { transform: translateY(0); }
-	100% { transform: translateY(50px); }
-}
-
-/* Header & Sidebar */
-header.header {
-	background-color: var(--sl-color-bg-nav) !important;
-	backdrop-filter: blur(16px) !important;
-	-webkit-backdrop-filter: blur(16px) !important;
-	border-bottom: 1px solid var(--sl-color-hairline) !important;
-}
-
-.sidebar-pane, .right-sidebar-panel {
-	background-color: transparent !important;
-	border-right: 1px solid var(--sl-color-hairline);
-}
-
-.right-sidebar-panel {
-	border-right: none;
-	border-left: 1px solid var(--sl-color-hairline);
-}
-
-/* =========================================
-   TYPOGRAPHY ENGINEERING (Perfect Rhythm)
-   ========================================= */
-
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
-	color: var(--sl-color-white) !important;
-	letter-spacing: -0.025em;
-	position: relative;
-}
-
-h1#_top {
-	font-weight: 800 !important;
+/* Tipografía Mono para Títulos */
+h1,
+h2,
+h3,
+h4,
+.site-title {
+	font-family: var(--sl-font-mono) !important;
 	letter-spacing: -0.04em;
-	line-height: 1.1;
-	background: var(--gradient-hero);
+	color: var(--color-text) !important;
+}
+
+/* ==========================================================================
+   4. HEADER (CORRECCIÓN DE BORDE DOBLE)
+   ========================================================================== */
+.header {
+	/* CRÍTICO: Eliminamos la sombra por defecto de Starlight */
+	box-shadow: none !important;
+	background-color: var(--color-bg-overlay) !important;
+	padding-inline: 1.5rem !important;
+	/* Menos margen lateral */
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+}
+
+.site-title {
+	font-weight: 700;
+	font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   5. HERO SECTION & BUTTONS (REDESIGNED)
+   ========================================================================== */
+
+/* Ajuste del contenedor principal */
+.hero {
+	padding-block: 6rem 8rem !important;
+	/* Más aire arriba y abajo */
+}
+
+/* 1. TÍTULO (Massive & Metallic) */
+.hero h1 {
+	font-family: 'JetBrains Mono', monospace !important;
+	font-size: clamp(3rem, 6vw, 5rem) !important;
+	/* Texto GIGANTE */
+	line-height: 1.1 !important;
+	font-weight: 800 !important;
+	letter-spacing: -0.04em !important;
+	margin-bottom: 1.5rem !important;
+}
+
+/* Efecto metálico/gradiente solo en Dark Mode */
+:root[data-theme='dark'] .hero h1 {
+	background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	margin-bottom: 1.5rem !important;
-	filter: drop-shadow(0 0 30px var(--theme-accent-glow));
+	text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
 }
 
-/* Body Text - The "Reading" Experience */
-.content-panel p {
-	margin-bottom: 1.5em;
+/* 2. TAGLINE (Subtítulo) */
+.hero .tagline {
+	font-family: 'Inter', sans-serif;
+	font-size: 1.25rem !important;
+	line-height: 1.6 !important;
+	color: var(--color-text-dim) !important;
+	max-width: 60ch;
+	/* Evita que el texto sea muy ancho */
 	font-weight: 400;
-	color: var(--sl-color-gray-1); /* High readability */
 }
 
-/* Strong emphasis */
-strong, b {
-	font-weight: 700;
-	color: var(--sl-color-white); /* Pop out from gray body */
+/* 3. CONTENEDOR DE ACCIONES */
+.hero .actions {
+	margin-top: 2.5rem !important;
+	gap: 2rem !important;
+	/* Separación amplia entre botón y link */
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	/* Alineado a la izquierda */
+	flex-wrap: wrap;
 }
 
-/* Lists */
-.content-panel ul, .content-panel ol {
-	color: var(--sl-color-gray-2);
-}
+/* 4. BOTÓN PRIMARIO (Electric Pill) */
+.hero .action.primary {
+	/* Gradiente sutil para dar volumen 3D */
+	background: linear-gradient(to bottom right, #3b82f6, #2563eb) !important;
+	color: #fff !important;
 
-.content-panel li {
-	margin-bottom: 0.5em;
-}
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	/* Borde de luz sutil */
+	border-radius: 9999px !important;
+	padding: 0.9rem 2.2rem !important;
+	/* Más grande */
 
-/* Links - Interactive Underscore */
-.content-panel a:not(.card a):not(.action) {
-	color: var(--sl-color-accent);
-	text-decoration: none;
-	background-image: linear-gradient(var(--sl-color-accent), var(--sl-color-accent));
-	background-position: 0% 100%;
-	background-repeat: no-repeat;
-	background-size: 0% 2px;
-	transition: background-size 0.3s ease, color 0.2s ease;
-	font-weight: 500;
-}
+	font-family: 'Inter', sans-serif !important;
+	font-weight: 600 !important;
+	font-size: 1.05rem !important;
+	text-decoration: none !important;
 
-.content-panel a:not(.card a):not(.action):hover {
-	background-size: 100% 2px;
-	color: var(--sl-color-accent-high);
-}
+	/* Sombra doble: Glow externo + Sombra interna */
+	box-shadow:
+		0 0 0 1px rgba(0, 0, 0, 0.2),
+		/* Borde oscuro fino */
+		0 4px 20px rgba(59, 130, 246, 0.4),
+		/* Glow azul */
+		inset 0 1px 0 rgba(255, 255, 255, 0.2);
+	/* Brillo superior interno */
 
-/* Inline Code */
-:not(pre) > code {
-	font-family: var(--sl-font-mono);
-	background-color: rgba(var(--sl-color-accent), 0.08) !important;
-	color: var(--sl-color-accent) !important;
-	border: 1px solid rgba(var(--sl-color-accent), 0.2);
-	border-radius: 6px;
-	padding: 0.15em 0.4em;
-	font-size: 0.875em;
-	font-weight: 500;
-}
-
-/* =========================================
-   COMPONENTS
-   ========================================= */
-
-/* Cards */
-.card, .link-card {
-	background: var(--theme-surface) !important;
-	backdrop-filter: blur(12px);
-	border: 1px solid var(--sl-color-hairline) !important;
-	border-radius: 16px !important;
-	box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-	transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-}
-
-.card:hover, .link-card:hover {
-	transform: translateY(-4px);
-	border-color: var(--sl-color-accent) !important;
-	background: linear-gradient(145deg, var(--theme-surface), rgba(var(--sl-color-accent), 0.05)) !important;
-	box-shadow: 
-		0 20px 40px -10px rgba(0, 0, 0, 0.2), 
-		0 0 20px var(--theme-accent-glow) !important;
-}
-
-/* Hero Logo */
-.hero img {
-	filter: drop-shadow(0 0 30px var(--theme-accent-glow));
-	animation: float 8s ease-in-out infinite;
-}
-
-@keyframes float {
-	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-8px); }
-}
-
-/* Code Blocks (Mini Terminals) */
-.expressive-code .frame {
-	border-radius: 12px !important;
-	border: 1px solid var(--sl-color-hairline) !important;
-	box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.3) !important;
-	background: #0e0e11 !important;
-}
-
-.expressive-code .header {
-	background-color: #18181b !important;
-	border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-}
-
-.expressive-code .header::before {
-	content: "";
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	background: #ef4444; 
-	box-shadow: 18px 0 0 #f59e0b, 36px 0 0 #10b981;
-	margin-left: 12px;
-	opacity: 0.8;
-}
-
-/* Admonitions */
-.starlight-aside {
-	border: 1px solid var(--sl-color-hairline) !important;
-	border-radius: 12px !important;
-	border-left-width: 1px !important;
-	background-color: var(--theme-surface) !important;
-	backdrop-filter: blur(8px);
-	box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	position: relative;
 	overflow: hidden;
 }
 
-.starlight-aside::before {
-	content: "";
-	position: absolute;
-	left: 0; top: 0; bottom: 0; width: 4px;
-	background: var(--sl-color-accent);
+/* Efecto Hover: Más brillo y sube ligeramente */
+.hero .action.primary:hover {
+	background: linear-gradient(to bottom right, #60a5fa, #3b82f6) !important;
+	box-shadow:
+		0 0 0 1px rgba(0, 0, 0, 0.2),
+		0 8px 30px rgba(59, 130, 246, 0.6),
+		inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	transform: translateY(-2px) scale(1.02);
+	color: #fff !important;
 }
 
-.starlight-aside__title {
-	font-weight: 700 !important;
+/* Icono dentro del botón (el cohete) */
+.hero .action.primary svg {
+	margin-left: 8px;
+	transform: translateY(-1px);
 }
 
-/* Scrollbars */
-::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
-}
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-	background: var(--sl-color-gray-3);
-	border-radius: 4px;
-	border: 2px solid var(--sl-color-bg);
-}
-::-webkit-scrollbar-thumb:hover { background: var(--sl-color-gray-2); }
+/* 5. BOTÓN SECUNDARIO (Link Limpio) */
+.hero .action.secondary {
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
 
-/* =========================================
-   9. BUTTONS & ACTIONS (Ultra-Integrated Glass)
-   ========================================= */
-
-/* Base reset for Starlight actions */
-.action,
-.sl-link-button {
-	border-radius: 12px !important;
-	padding: 0.9rem 1.8rem !important;
-	font-weight: 600 !important;
-	letter-spacing: -0.01em;
-	transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1) !important;
+	color: var(--color-text-dim) !important;
+	font-family: 'Inter', sans-serif !important;
+	font-size: 1.05rem !important;
+	font-weight: 500 !important;
 	text-decoration: none !important;
+
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	transition: color 0.2s;
+}
+
+.hero .action.secondary:hover {
+	color: var(--color-text) !important;
+	/* Se vuelve blanco al hover */
+}
+
+/* Flechita del link externo */
+.hero .action.secondary::after {
+	content: '↗';
+	/* O usar el icono SVG si starlight lo provee */
+	font-family: sans-serif;
+	font-size: 1.1rem;
+	transition: transform 0.2s;
+}
+
+.hero .action.secondary:hover::after {
+	transform: translate(2px, -2px);
+	color: var(--color-accent);
+}
+
+/* 6. IMAGEN HERO (Glow trasero) */
+/* Esto añade el resplandor azul detrás de tu logo cuadrado */
+.hero>div:last-child {
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+
+.hero>div:last-child::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 120%;
+	height: 120%;
+	background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+	z-index: -1;
+	pointer-events: none;
+	filter: blur(40px);
+}
+
+/* ==========================================================================
+   6. CARDS (ESTILO "MÓDULOS")
+   ========================================================================== */
+.card-grid {
+	gap: 1.5rem !important;
+}
+
+.card {
+	background-color: var(--card-bg) !important;
+	border: 1px solid var(--color-border) !important;
+	border-radius: 12px !important;
+	padding: 1.5rem !important;
+	box-shadow: none !important;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Hover Effect: Borde azul y glow sutil */
+.card:hover {
+	border-color: var(--color-text-dim) !important;
+	/* Zinc más claro */
+	transform: translateY(-2px);
+}
+
+:root[data-theme='dark'] .card:hover {
+	border-color: #3f3f46 !important;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+	/* Sombra profunda */
+}
+
+/* Título de la Card */
+.card .title {
+	font-family: var(--sl-font-system) !important;
+	/* Sans serif en titulos de card segun tu img */
+	font-weight: 700 !important;
+	font-size: 1.1rem !important;
+	color: var(--color-text) !important;
+
+	/* Línea separadora */
+	border-bottom: 1px solid var(--color-border);
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
+
+	/* Flex para empujar la flecha */
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* El icono dentro del título (Starlight lo pone en un span) */
+.card .title>span {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 }
 
-/* Primary Button - "Cyberpunk Entrance" */
-.action.primary,
-.sl-link-button.primary {
-	background: rgba(59, 130, 246, 0.15) !important; /* Semi-transparent blue */
-	color: #ffffff !important; /* White for WCAG 2.1 AA compliance */
-	border: 1px solid rgba(96, 165, 250, 0.4) !important; /* Glowing border */
-	backdrop-filter: blur(10px) !important;
-	-webkit-backdrop-filter: blur(10px) !important;
-	box-shadow: 
-		0 0 15px rgba(59, 130, 246, 0.1),
-		inset 0 0 10px rgba(59, 130, 246, 0.1) !important;
-	position: relative;
-	overflow: hidden;
+/* Flecha a la derecha (→) */
+.card .title::after {
+	content: '→';
+	font-family: var(--sl-font-mono);
+	color: var(--color-text-dim);
+	transition: transform 0.2s, color 0.2s;
 }
 
-/* Pulse Animation for Primary Entrance */
-.action.primary::after,
-.sl-link-button.primary::after {
-	content: "";
-	position: absolute;
-	top: -50%; left: -50%; width: 200%; height: 200%;
-	background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
-	animation: pulseGlow 4s infinite ease-in-out;
-	pointer-events: none;
+.card:hover .title::after {
+	color: var(--color-accent);
+	transform: translateX(4px);
 }
 
-@keyframes pulseGlow {
-	0%, 100% { opacity: 0.3; transform: scale(1); }
-	50% { opacity: 0.6; transform: scale(1.1); }
+.card .description {
+	color: var(--color-text-dim) !important;
+	font-size: 0.95rem;
+	line-height: 1.6;
 }
 
-.action.primary:hover,
-.sl-link-button.primary:hover {
-	background: rgba(59, 130, 246, 0.25) !important;
-	border-color: #60a5fa !important;
+/* Botón de lectura en Cards */
+.read-more-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 1.5rem;
+	padding: 0.5rem 1.2rem;
+	background-color: var(--color-border);
+	color: var(--color-text-dim) !important;
+	text-decoration: none !important;
+	border-radius: 999px;
+	font-size: 0.85rem;
+	font-weight: 500;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	border: 1px solid transparent;
+}
+
+.read-more-btn:hover {
+	background-color: var(--color-accent);
 	color: white !important;
-	transform: translateY(-3px) scale(1.02);
-	box-shadow: 
-		0 0 25px rgba(59, 130, 246, 0.3),
-		0 10px 20px -5px rgba(0, 0, 0, 0.5) !important;
+	transform: translateX(5px);
+	box-shadow: 0 4px 12px var(--color-accent-glow);
 }
 
-/* Secondary/Minimal Button - "Ghost Glass" */
-.action.minimal,
-.sl-link-button.minimal,
-.sl-link-button.secondary {
-	background: rgba(255, 255, 255, 0.03) !important;
-	color: var(--sl-color-gray-2) !important;
-	border: 1px solid var(--sl-color-hairline) !important;
-	backdrop-filter: blur(8px) !important;
-}
-
-.action.minimal:hover,
-.sl-link-button.minimal:hover,
-.sl-link-button.secondary:hover {
-	background: rgba(255, 255, 255, 0.08) !important;
-	color: var(--sl-color-white) !important;
-	border-color: var(--sl-color-gray-3) !important;
-	transform: translateY(-2px);
-}
-
-/* Icon integration inside buttons */
-.action astro-icon,
-.sl-link-button astro-icon,
-.sl-link-button svg {
-	width: 1.2em;
-	height: 1.2em;
+.read-more-btn span {
 	transition: transform 0.3s ease;
 }
 
-.action.primary:hover astro-icon,
-.sl-link-button.primary:hover astro-icon,
-.sl-link-button.primary:hover svg {
-	transform: translateX(3px) rotate(-5deg);
+.read-more-btn:hover span {
+	transform: scale(1.2);
 }
 
-/* Social Icons in Header */
-.social-icons a {
-	color: var(--sl-color-gray-3) !important;
-	transition: color 0.2s ease;
+
+/* ==========================================================================
+   7. CODE BLOCKS (TERMINAL MACOS)
+   ========================================================================== */
+.expressive-code .frame {
+	border: 1px solid var(--color-border) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
+	/* Sombra profunda */
+	background: var(--code-bg) !important;
 }
 
-.social-icons a:hover {
-	color: var(--sl-color-accent) !important;
+/* Header del bloque de código */
+.expressive-code .frame .header {
+	background-color: var(--code-header) !important;
+	border-bottom: 1px solid var(--color-border) !important;
+	padding-left: 4rem !important;
+	/* Ajustado para el nuevo posicionamiento de puntos */
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 2.2rem;
+}
+
+/* Puntos MacOS (Rojo, Amarillo, Verde) */
+.expressive-code .frame .header::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 0.7rem;
+	/* Más pegado a la izquierda */
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #ff5f56;
+	box-shadow: 15px 0 0 #ffbd2e, 30px 0 0 #27c93f;
+}
+
+/* Título del archivo */
+.expressive-code .frame .title {
+	color: var(--color-text-dim) !important;
+	font-family: var(--sl-font-mono);
+	font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   8. EXTRAS UI
+   ========================================================================== */
+/* Sidebar "invisible" */
+.sidebar-content {
+	border-right: 1px solid var(--color-border);
+}
+
+.sidebar-content a[aria-current="page"] {
+	color: var(--color-accent) !important;
+	border-left-color: var(--color-accent);
+	background: linear-gradient(90deg, var(--color-accent-glow) 0%, transparent 100%);
+}
+
+/* Search Button Style */
+button[data-open-modal] {
+	border: 1px solid var(--color-border) !important;
+	background: transparent !important;
+	border-radius: 6px;
+	font-size: 0.8rem;
+	color: var(--color-text-dim);
+}
+
+button[data-open-modal]:hover {
+	border-color: var(--color-text-dim) !important;
+	color: var(--color-text);
+}
+
+/* ==========================================================================
+   9. LAYOUT DE CONTENIDO (Centrado & Legibilidad)
+   ========================================================================== */
+/* Centrar la columna principal de texto con un ancho más profesional */
+.sl-markdown-content {
+	max-width: 1000px !important;
+	margin-inline: auto !important;
+}
+
+/* Encabezados centrados para jerarquía visual */
+.main-frame h1,
+.main-frame h2,
+.main-frame h3 {
+	text-align: center !important;
+	margin-inline: auto !important;
+	max-width: 100% !important;
+}
+
+/* Bloques que deben estar centrados */
+.sl-markdown-content :is(img, .expressive-code, .card-grid) {
+	margin-inline: auto !important;
+	width: 100%;
+}
+
+/* Párrafos: el bloque se centra, el texto va a la izquierda */
+.sl-markdown-content p {
+	max-width: 75ch;
+	/* Ancho óptimo de lectura */
+	margin-inline: auto !important;
+	text-align: left;
+	line-height: 1.7;
+	text-wrap: pretty;
+}
+
+/* ==========================================================================
+   10. ADMONITIONS (Tips, Fun Facts, Notes)
+   ========================================================================== */
+/* Forzamos el bloque TIP (púrpura por defecto en Starlight) a nuestro estilo azul Labs */
+aside[data-type="tip"].starlight-aside,
+.sl-admonition-tip {
+	background: rgba(59, 130, 246, 0.05) !important;
+	border: 1px solid rgba(59, 130, 246, 0.1) !important;
+	border-left: 4px solid var(--color-accent) !important;
+	border-radius: 8px !important;
+	padding: 1.25rem !important;
+	margin-block: 2rem !important;
+	max-width: 850px;
+	margin-inline: auto !important;
+}
+
+/* Título e Icono */
+aside[data-type="tip"] .admonition-title,
+.sl-admonition-tip .admonition-title {
+	color: var(--color-accent) !important;
+	font-family: var(--sl-font-mono) !important;
+	font-weight: 700 !important;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	font-size: 0.8rem !important;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+/* Forzar color del icono SVG */
+aside[data-type="tip"] .admonition-title svg,
+.sl-admonition-tip .sl-icon {
+	color: var(--color-accent) !important;
+	fill: var(--color-accent) !important;
 }
