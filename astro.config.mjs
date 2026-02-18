@@ -99,15 +99,29 @@ export default defineConfig({
 				{
 					tag: 'meta',
 					attrs: {
+						property: 'og:type',
+						content: 'website',
+					},
+				},
+				{
+					tag: 'meta',
+					attrs: {
+						property: 'og:site_name',
+						content: 'Herwingx Labs',
+					},
+				},
+				{
+					tag: 'meta',
+					attrs: {
 						property: 'og:image',
-						content: '/og-image.png',
+						content: 'https://docs.herwingx.dev/og-image.png',
 					},
 				},
 				{
 					tag: 'meta',
 					attrs: {
 						name: 'twitter:image',
-						content: '/og-image.png',
+						content: 'https://docs.herwingx.dev/og-image.png',
 					},
 				},
 				{
@@ -121,7 +135,7 @@ export default defineConfig({
 			],
 			// Componentes personalizados
 			components: {
-				// Podemos sobrescribir componentes más adelante
+				Head: './src/components/Head.astro',
 			},
 		}),
 	],

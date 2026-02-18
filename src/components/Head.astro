@@ -1,0 +1,11 @@
+---
+import Default from '@astrojs/starlight/components/Head.astro';
+
+const route = Astro.locals.starlightRoute;
+const title = route?.entry?.data?.title || route?.siteTitle || 'Herwingx Labs';
+const description = route?.entry?.data?.description || 'Tutoriales y recursos avanzados de desarrollo - Frontend, Backend y DevOps';
+---
+
+<Default {...Astro.props}><slot /></Default>
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
