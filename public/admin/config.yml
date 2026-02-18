@@ -38,6 +38,13 @@ collections:
           widget: string,
           required: true,
         }
+      - {
+          label: "OG Image URL",
+          name: og_image,
+          widget: string,
+          required: false,
+          hint: "URL absoluta de la imagen OG (ej: https://docs.herwingx.dev/og-image.png)",
+        }
       - label: Sidebar
         name: sidebar
         widget: object
@@ -120,6 +127,13 @@ collections:
           widget: string,
           required: true,
         }
+      - {
+          label: "OG Image URL",
+          name: og_image,
+          widget: string,
+          required: false,
+          hint: "URL absoluta de la imagen OG (ej: https://docs.herwingx.dev/og-image.png)",
+        }
       - label: Sidebar
         name: sidebar
         widget: object
@@ -198,6 +212,13 @@ collections:
           name: description,
           widget: string,
           required: true,
+        }
+      - {
+          label: "OG Image URL",
+          name: og_image,
+          widget: string,
+          required: false,
+          hint: "URL absoluta de la imagen OG (ej: https://docs.herwingx.dev/og-image.png)",
         }
       - label: Sidebar
         name: sidebar
@@ -287,6 +308,13 @@ collections:
           widget: string,
           required: true,
         }
+      - {
+          label: "OG Image URL",
+          name: og_image,
+          widget: string,
+          required: false,
+          hint: "URL absoluta de la imagen OG (ej: https://docs.herwingx.dev/og-image.png)",
+        }
       - label: Sidebar
         name: sidebar
         widget: object
@@ -336,6 +364,13 @@ collections:
           name: description,
           widget: string,
           required: true,
+        }
+      - {
+          label: "OG Image URL",
+          name: og_image,
+          widget: string,
+          required: false,
+          hint: "URL absoluta de la imagen OG (ej: https://docs.herwingx.dev/og-image.png)",
         }
       - label: Sidebar
         name: sidebar
@@ -416,6 +451,13 @@ collections:
           widget: string,
           required: true,
         }
+      - {
+          label: "OG Image URL",
+          name: og_image,
+          widget: string,
+          required: false,
+          hint: "URL absoluta de la imagen OG (ej: https://docs.herwingx.dev/og-image.png)",
+        }
       - label: Sidebar
         name: sidebar
         widget: object
@@ -469,4 +511,11 @@ collections:
         fields:
           - { label: Título, name: title, widget: string }
           - { label: Descripción, name: description, widget: string }
+          - {
+              label: "OG Image URL",
+              name: og_image,
+              widget: string,
+              required: false,
+              hint: "URL absoluta de la imagen OG (ej: https://docs.herwingx.dev/og-image.png)",
+            }
           - { label: Contenido, name: body, widget: markdown }

@@ -8,6 +8,7 @@ export const collections = {
 		schema: docsSchema({
 			extend: z.object({
 				date: z.date().or(z.string()).optional(),
+				og_image: z.string().url().optional(),
 			}),
 		}),
 	}),

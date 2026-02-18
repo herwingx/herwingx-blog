@@ -56,6 +56,7 @@ Crea un archivo `.mdx` en la carpeta correspondiente.
 title: Mi Nuevo Experimento
 date: "2026-02-04"   # ¡Importante! Usa comillas y fecha actual.
 description: Breve resumen de qué rompiste hoy.
+og_image: https://docs.herwingx.dev/images/mi-imagen.png  # (Opcional) URL absoluta
 sidebar:
   order: 10          # (Opcional) Orden manual
 ---
@@ -69,38 +70,40 @@ Aquí empieza la magia...
 
 Las "Imágenes OG" son las que aparecen cuando compartes un link en WhatsApp, Twitter, LinkedIn, etc.
 
-### 1. Ubicación de Archivos
-Todas las imágenes deben ir dentro de la carpeta `public`.
-Recomendamos organizarlas así:
+> **⚠️ No hay imagen OG global.** Cada artículo debe tener su propia imagen. Si no la tiene, se comparte solo con título y descripción.
 
-```bash
-public/
-├── og-image.png          # Imagen por defecto para todo el sitio
-└── images/               # Imágenes específicas
-    ├── warp-card.png
-    └── docker-intro.jpg
-```
+### Cómo funciona
 
-### 2. Configuración en el Artículo
-En el archivo `.mdx`, usa la ruta **absoluta** (empezando con `/`) que corresponde a lo que hay dentro de `public`.
+- **Starlight genera automáticamente** `og:title`, `og:description`, `og:url` y `og:locale` desde el frontmatter.
+- **Cada artículo define su propia imagen** con el campo `og_image` (URL absoluta).
+- Los tags globales (`og:type`, `og:site_name`, `twitter:card`) se definen en `astro.config.mjs`.
+- El componente `src/components/Head.astro` inyecta `twitter:title`, `twitter:description` y la imagen si existe.
 
-**Ejemplo:** Si tu imagen está en `public/images/warp-card.png`, la configuración es:
+### Agregar imagen OG a una página
+
+**Opción A: Desde Sveltia CMS (Recomendado)**
+Cada colección tiene un campo **"OG Image URL"**. Solo pega la URL absoluta.
+
+**Opción B: Desde código**
+Agrega `og_image` al frontmatter:
 
 ```mdx
 ---
 title: Warp Terminal
 description: La terminal del futuro...
-head:
-  - tag: meta
-    attrs:
-      property: og:image
-      content: /images/warp-card.png   <-- Ruta desde 'public'
-  - tag: meta
-    attrs:
-      name: twitter:image
-      content: /images/warp-card.png   <-- Repetir aquí
+og_image: https://docs.herwingx.dev/images/warp-card.png
 ---
 ```
+
+### Reglas importantes
+
+| Regla | Detalle |
+| :--- | :--- |
+| **Cada artículo con su imagen** | No existe imagen por defecto. Cada post necesita su propia `og_image` |
+| **URL absoluta obligatoria** | `https://docs.herwingx.dev/images/warp-card.png` (no `/images/warp-card.png`) |
+| **Archivos en `public/`** | Las imágenes van en `public/` o `public/images/` |
+| **Sin imagen = sin preview** | Si no defines `og_image`, el link se comparte sin imagen (solo título y descripción) |
+| **Tamaño recomendado** | 1200×630px, formato PNG o JPG |
 
 ---
 
@@ -163,6 +166,7 @@ Edita `public/admin/config.yml` y añade la nueva colección:
     - { label: Título, name: title, widget: string, required: true }
     - { label: Fecha, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false, required: false }
     - { label: Descripción, name: description, widget: string, required: true }
+    - { label: "OG Image URL", name: og_image, widget: string, required: false, hint: "URL absoluta de la imagen OG" }
     - label: Sidebar
       name: sidebar
       widget: object
