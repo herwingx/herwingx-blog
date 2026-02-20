@@ -24,6 +24,8 @@
 - **Home dinámico**: La portada se actualiza sola con las últimas publicaciones.
 - **PWA ready**: Manifiesto web y meta tags para instalación como app.
 - **Multiidioma**: Estructura preparada para español (por defecto) e inglés.
+- **Analytics**: Métricas de uso con Cloudflare Web Analytics (sin cookies, privacidad first).
+- **Feed RSS**: Feed automático en `/rss.xml` con todos los artículos publicados.
 
 ---
 
@@ -48,7 +50,8 @@ Todo el contenido vive en `src/content/docs/`, organizado en 4 pilares:
 | **CMS**             | Sveltia CMS (Fork moderno de Decap)     |
 | **Estilos**         | Custom CSS (Variables puras)            |
 | **Automatización**  | Node.js Scripts (Auto-badges)           |
-| **Despliegue**      | Cloudflare Pages                        |
+| **Analítica**       | Cloudflare Web Analytics                |
+| **Despliegue**      | GitHub Pages (GitHub Actions + Caché)   |
 | **Auth (CMS)**      | Cloudflare Workers (OAuth Proxy)        |
 
 ---
@@ -82,6 +85,8 @@ npm run dev
 ## 📁 Estructura del Proyecto
 
 ```
+├── .github/workflows/
+│   └── deploy.yml       # CI/CD: build con caché + deploy a GitHub Pages
 ├── public/
 │   ├── admin/           # Sveltia CMS (config + UI)
 │   ├── icons/           # Iconos PWA
@@ -89,9 +94,9 @@ npm run dev
 ├── scripts/
 │   └── auto-badges.mjs  # Auto-etiquetado de posts nuevos
 ├── src/
-│   ├── components/      # Componentes Astro personalizados
+│   ├── components/      # Componentes Astro personalizados (Head, analytics)
 │   ├── content/docs/    # Todo el contenido del sitio
-│   ├── pages/           # Páginas especiales (admin)
+│   ├── pages/           # Feed RSS y páginas especiales (admin)
 │   └── styles/          # CSS personalizado
 ├── astro.config.mjs     # Configuración principal de Astro/Starlight
 └── package.json
@@ -109,7 +114,7 @@ Las guías de cómo gestionar, mantener y extender este proyecto están en la ca
 | [Imágenes OG](docs/imagenes-og.md) | Cómo funcionan las imágenes Open Graph y cómo agregarlas |
 | [Carpetas y Subcarpetas](docs/carpetas.md) | Cómo crear nuevas secciones y registrarlas en el CMS |
 | [Guía de Estilos](docs/estilos.md) | Convenciones para índices de categorías y subcarpetas |
-| [Automatización](docs/automatizacion.md) | Cómo funciona el script de auto-badges |
+| [Automatización](docs/automatizacion.md) | Auto-badges, CI/CD con caché, Analytics y Feed RSS |
 | [Mantenimiento](docs/mantenimiento.md) | Cheatsheet rápido: qué archivo tocar para cada acción |
 
 ---

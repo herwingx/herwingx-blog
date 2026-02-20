@@ -22,19 +22,30 @@ jobs:
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4
-      
+
       - name: 📦 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-      
+          node-version: "20"
+          cache: "npm"
+
+      - name: ⚡ Cache node_modules & Astro
+        uses: actions/cache@v4
+        id: cache-deps
+        with:
+          path: |
+            node_modules
+            .astro
+          key: ${{ runner.os }}-deps-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-deps-
+
       - name: 📥 Instalar dependencias
         run: npm ci
-      
+
       - name: 🔨 Build
         run: npm run build
-      
+
       - name: 📤 Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

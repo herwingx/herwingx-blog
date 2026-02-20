@@ -15,6 +15,9 @@ Referencia rápida: ¿qué archivo tocar según la acción?
 | **Cambiar CSS global**    | `src/styles/custom.css`                                                                                                                            | No                  |
 | **Modificar sidebar**     | `astro.config.mjs` → sección `sidebar`                                                                                                            | **Sí**              |
 | **Cambiar logo**          | Reemplazar archivos en `src/assets/` y actualizar `astro.config.mjs`                                                                              | **Sí**              |
+| **Editar analytics**      | `src/components/Head.astro` → bloque Cloudflare Web Analytics                                                                                      | No                  |
+| **Editar feed RSS**       | `src/pages/rss.xml.js` → filtros y metadata del feed                                                                                               | No                  |
+| **Editar CI/CD**          | `.github/workflows/deploy.yml` → pasos de build, caché o deploy                                                                                   | No (push a `main`)  |
 
 ---
 
@@ -25,7 +28,9 @@ Referencia rápida: ¿qué archivo tocar según la acción?
 | `astro.config.mjs`             | Configuración principal (sidebar, idiomas, head)   |
 | `public/admin/config.yml`      | Colecciones y campos del CMS                       |
 | `src/styles/custom.css`        | Estilos globales personalizados                    |
-| `src/components/Head.astro`    | Meta tags personalizados (OG, Twitter)             |
+| `src/components/Head.astro`    | Meta tags personalizados (OG, Twitter, Analytics)  |
+| `src/pages/rss.xml.js`         | Feed RSS automático (`/rss.xml`)                   |
+| `.github/workflows/deploy.yml` | CI/CD: build con caché + deploy a GitHub Pages     |
 | `scripts/auto-badges.mjs`     | Script de auto-etiquetado                          |
 | `src/content/docs/index.mdx`  | Página de inicio / portada                         |
 

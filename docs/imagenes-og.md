@@ -41,6 +41,6 @@ og_image: https://docs.herwingx.dev/images/warp-card.png
 | :----------------------------- | :--------------------------------------------------------------------------------- |
 | **Cada artículo con su imagen** | No existe imagen por defecto. Cada post necesita su propia `og_image`             |
 | **URL absoluta obligatoria**   | `https://docs.herwingx.dev/images/warp-card.png` (no `/images/warp-card.png`)      |
-| **Archivos en `public/`**     | Las imágenes van en `public/` o `public/images/`                                   |
+| **Archivos en `public/images/`** | Las imágenes van en `public/images/` (el CMS las guarda ahí automáticamente)       |
 | **Sin imagen = sin preview**   | Si no defines `og_image`, el link se comparte sin imagen (solo título y descripción) |
 | **Tamaño recomendado**         | 1200×630px, formato PNG o JPG                                                      |

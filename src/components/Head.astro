@@ -1,9 +1,11 @@
 ---
-import Default from '@astrojs/starlight/components/Head.astro';
+import Default from "@astrojs/starlight/components/Head.astro";
 
 const route = Astro.locals.starlightRoute;
-const title = route?.entry?.data?.title || route?.siteTitle || 'Herwingx Labs';
-const description = route?.entry?.data?.description || 'Tutoriales y recursos avanzados de desarrollo - Frontend, Backend y DevOps';
+const title = route?.entry?.data?.title || route?.siteTitle || "Herwingx Labs";
+const description =
+  route?.entry?.data?.description ||
+  "Tutoriales y recursos avanzados de desarrollo - Frontend, Backend y DevOps";
 
 // OG image: solo se inyecta si el frontmatter tiene og_image
 const ogImage = (route?.entry?.data as any)?.og_image as string | undefined;
@@ -14,3 +16,8 @@ const ogImage = (route?.entry?.data as any)?.og_image as string | undefined;
 <meta name="twitter:description" content={description} />
 {ogImage && <meta property="og:image" content={ogImage} />}
 {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+<!-- Cloudflare Web Analytics -->
+<Fragment
+  set:html={`<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "1f80062308054e7491ccc4f88fbfff29"}'></script>`}
+/>

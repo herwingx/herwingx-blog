@@ -12,6 +12,7 @@
     "dev:cms": "concurrently \"npm run dev\" \"npm run cms\""
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.15",
     "@astrojs/starlight": "^0.37.1",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
