@@ -112,7 +112,7 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: {
 						property: 'og:site_name',
-						content: 'Herwingx Labs',
+						content: 'Herwingx Blog',
 					},
 				},
 				{
