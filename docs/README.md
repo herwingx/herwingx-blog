@@ -1,4 +1,4 @@
-# 📖 Documentación Interna — Herwingx Labs
+# 📖 Documentación Interna — Herwingx Blog
 
 Esta carpeta contiene las guías de gestión y mantenimiento del proyecto. **No es contenido público**, es documentación para el mantenedor del sitio.
 

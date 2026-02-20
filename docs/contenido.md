@@ -1,6 +1,6 @@
 # 📝 Gestión de Contenido
 
-Guía para crear y gestionar artículos en Herwingx Labs.
+Guía para crear y gestionar artículos en Herwingx Blog.
 
 ---
 
